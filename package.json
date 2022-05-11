@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "concurrently -n app,functions 'npm run dev -w app' 'npm run dev -w functions'",
+    "dev": "concurrently -n app,functions 'npm run dev -w app' 'npm run serve -w functions'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deployStagingSite": "firebase deploy -P staging --only hosting:y2y2022"
   },
