@@ -1,0 +1,59 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": {
+    "source": "functions",
+    "predeploy": [
+      "npm --prefix app run build && rm -rf functions/nuxt && cp -r app/.nuxt/ functions/nuxt/ && cp app/nuxt.config.js functions/"
+    ]
+  },
+  "hosting": {
+    "predeploy": [
+      "rm -rf public/* && mkdir -p public/_nuxt && cp -r app/.nuxt/dist/client/ public/_nuxt && cp -a app/static/. public/"
+    ],
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "ssrapp"
+      }
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "ui": {
+      "enabled": true,
+      "port": 9091
+    }
+  },
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "y2y2022",
+    "staging": "y2y2022.test"
+  },
+  "targets": {}
+}

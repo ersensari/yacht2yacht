@@ -1,0 +1,24 @@
+{
+  "name": "yacht2yacht",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "concurrently -n app,functions 'npm run dev -w app' 'npm run dev -w functions'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deployStagingSite": "firebase deploy -P staging --only hosting:y2y2022"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "workspaces": [
+    "app",
+    "functions"
+  ],
+  "dependencies": {
+    "concurrently": "^7.1.0"
+  },
+  "engines": {
+    "node": "16",
+    "npm": "8"
+  }
+}
