@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "vue-tsc --noEmit && nuxt build",
+    "dev": "nuxt dev --port=3001",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.3",
+    "vue-tsc": "^0.34.12"
+  },
+  "dependencies": {
+    "mdi": "^2.2.43",
+    "sass": "^1.51.0",
+    "vuetify": "^3.0.0-beta.1"
+  }
+}

@@ -1,34 +1,132 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  },
   "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
+    "rules": "firestore.rules"
   },
   "functions": {
-    "source": "functions",
     "predeploy": [
-      "npm --prefix app run build && rm -rf functions/nuxt && cp -r app/.nuxt/ functions/nuxt/ && cp app/nuxt.config.js functions/"
-    ]
-  },
-  "hosting": {
-    "predeploy": [
-      "rm -rf public/* && mkdir -p public/_nuxt && cp -r app/.nuxt/dist/client/ public/_nuxt && cp -a app/static/. public/"
+      "npm --prefix \"$RESOURCE_DIR\" run lint"
     ],
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "function": "ssrapp"
-      }
-    ]
+    "source": "functions"
   },
+  "hosting": [
+    {
+      "site": "y2y-web-app",
+      "public": "public",
+      "headers": [
+        {
+          "source": "/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, must-revalidate"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2|font.css)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=604800"
+            }
+          ]
+        }
+      ],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "/user-files/uploads",
+          "function": "uploadFile"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "site": "y2y2022",
+      "public": "app/staging",
+      "headers": [
+        {
+          "source": "/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, must-revalidate"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2|font.css)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=604800"
+            }
+          ]
+        }
+      ],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "/user-files/uploads",
+          "function": "uploadFile"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "site": "y2ypanel",
+      "public": "panel/staging",
+      "headers": [
+        {
+          "source": "/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, must-revalidate"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2|font.css)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=604800"
+            }
+          ]
+        }
+      ],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "/user-files/uploads",
+          "function": "uploadFile"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ],
   "storage": {
     "rules": "storage.rules"
   },
@@ -40,20 +138,19 @@
       "port": 5001
     },
     "firestore": {
-      "port": 8080
-    },
-    "database": {
-      "port": 9000
+      "port": 8025
     },
     "hosting": {
       "port": 5000
     },
+    "pubsub": {
+      "port": 8085
+    },
+    "storage": {
+      "port": 9199
+    },
     "ui": {
-      "enabled": true,
-      "port": 9091
+      "enabled": true
     }
-  },
-  "remoteconfig": {
-    "template": "remoteconfig.template.json"
   }
 }
