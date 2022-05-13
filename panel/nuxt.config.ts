@@ -7,14 +7,18 @@ export default defineNuxtConfig({
     shim: false,
     typeCheck: true
   },
-  pages: true,
-  css: ["vuetify/lib/styles/main.sass", "mdi/css/materialdesignicons.min.css"],
-  build: {
-    transpile: ["vuetify"]
-  },
+
+  css: [
+    'assets/scss/app.scss'
+  ],
   vite: {
     define: {
       "process.env.DEBUG": false,
     },
   },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag: string) => ['hgroup'].includes(tag)
+    }
+  }
 });

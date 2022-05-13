@@ -8,11 +8,11 @@
   },
   "devDependencies": {
     "nuxt": "3.0.0-rc.3",
+    "nuxt-windicss": "^2.3.1",
     "vue-tsc": "^0.34.12"
   },
   "dependencies": {
-    "mdi": "^2.2.43",
-    "sass": "^1.51.0",
-    "vuetify": "^3.0.0-beta.1"
+    "@picocss/pico": "^1.5.0",
+    "sass": "^1.51.0"
   }
 }
