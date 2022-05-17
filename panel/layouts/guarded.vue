@@ -1,24 +1,18 @@
 <template>
-  <Html lang="en" data-theme="light">
-
-    <Body>
-
-      <Header />
-      <!-- Main -->
-      <main class="container">
-        <div class="grid">
-          <div>
-            <LeftMenu />
-          </div>
-          <div>
-            <slot />
-          </div>
+  <div>
+    <Html lang="en">
+      <Body>
+        <div>
+          <SiteHeader />
+          <LeftMenu />
+          <v-main>
+            <div class="container pa-2">
+              <slot />
+            </div>
+          </v-main>
+          <Footer />
         </div>
-      </main><!-- ./ Main -->
-      <Footer />
-    </Body>
-
-  </Html>
+      </Body>
+    </Html>
+  </div>
 </template>
-<script setup lang="ts">
-</script>

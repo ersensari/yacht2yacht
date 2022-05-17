@@ -5,20 +5,19 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
     shim: false,
-    typeCheck: true
+    typeCheck: true,
   },
 
   css: [
-    'assets/scss/app.scss'
+    "vuetify/lib/styles/main.sass",
+    "assets/scss/app.scss",
   ],
+  build: {
+    transpile: ["vuetify"],
+  },
   vite: {
     define: {
       "process.env.DEBUG": false,
     },
   },
-  vue: {
-    compilerOptions: {
-      isCustomElement: (tag: string) => ['hgroup'].includes(tag)
-    }
-  }
 });

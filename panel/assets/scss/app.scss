@@ -1,9 +1,3 @@
-@import '@picocss/pico/scss/pico.scss';
-footer,
-header,
-main {
-  margin-left: auto;
-  margin-right: auto;
-  padding: var(--block-spacing-vertical) 0;
-  width: 100%;
+body {
+  @apply m-0 font-sans;
 }
