@@ -21,5 +21,11 @@
   "engines": {
     "node": "16",
     "npm": "8"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "eslint": "^8.16.0",
+    "eslint-plugin-vue": "^9.0.1"
   }
 }
