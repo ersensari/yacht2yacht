@@ -1,0 +1,76 @@
+// Variables
+@import 'variables';
+
+.fly {
+  @include do-box-shadow();
+  position: absolute;
+  z-index: 5;
+  width: 60vw !important;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  resize: both;
+}
+
+.solid-box-search {
+  width: 80%;
+  background: rgba(255, 255, 255, 1);
+  padding: 10px 10px 10px 40px;
+  border: 1px rgba(223, 225, 229, 1) solid;
+  border-radius: 100px;
+  font-weight: bold;
+  color: #333;
+  h1 {
+    font-size: 28px;
+    font-weight: bold !important;
+    @media (max-width: 576px) {
+      font-size: 20px;
+    }
+  }
+
+  label {
+    font-size: 20px;
+    font-weight: normal;
+  }
+
+  .input-group {
+    border: 1px rgba(223, 225, 229, 1) solid;
+    padding: 4px 6px 4px 6px;
+    border-radius: $border-radius-lg;
+    flex-wrap: nowrap !important;
+    background-color: #ffffff;
+    color: #333;
+    input {
+      border: none;
+      background-color: transparent;
+    }
+
+    input:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    .far {
+      color: gray !important;
+    }
+  }
+
+  .input-group:focus-within {
+    background-color: #ffffff;
+    @include do-box-shadow();
+  }
+  .input-group:hover {
+    background-color: #ffffff;
+    @include do-box-shadow();
+  }
+
+  .hand-pointer {
+    cursor: pointer !important;
+  }
+
+  .btn-xl {
+    font-size: 2.25rem !important;
+    height: 76px;
+    width: 76px;
+  }
+}

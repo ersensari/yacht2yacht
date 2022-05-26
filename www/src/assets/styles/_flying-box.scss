@@ -1,0 +1,64 @@
+// Variables
+@import 'variables';
+
+.flying-box {
+  box-shadow: 0 10px 20px 0 #0d4086;
+  position: absolute;
+  z-index: 5;
+  width: 320px;
+  top: calc(50% - 100px);
+  left: calc(80% - 250px);
+  transform: translate(50%, -50%);
+  transform-origin: center center;
+  resize: both;
+  background: #fff;
+  padding: 25px;
+  border: 1px solid #dfe1e5;
+  border-radius: 10px;
+  color: #e83531;
+  h1 {
+    font-size: 28px;
+    font-weight: bold;
+    @media (max-width: 912px) {
+      font-size: 16px;
+    }
+  }
+
+  label {
+    font-size: 20px;
+    font-weight: normal;
+  }
+
+  .fa {
+    color: gray;
+  }
+
+  .input-group {
+    border: 1px rgba(223, 225, 229, 1) solid;
+    padding: 4px 6px 4px 6px;
+    border-radius: 10px;
+
+    input {
+      border: none;
+      background-color: transparent;
+    }
+
+    input:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  .input-group:focus-within {
+    background-color: #ffffff;
+    @include do-box-shadow();
+  }
+
+  .hand-pointer {
+    cursor: pointer !important;
+  }
+
+  @media (max-width: 912px) {
+    width: 250px;
+  }
+}

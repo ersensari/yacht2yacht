@@ -8,16 +8,11 @@ declare module '@vue/runtime-core' {
     Counter: typeof import('./components/Counter.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
-    IFaRegularWallet: typeof import('~icons/fa-regular/wallet')['default']
-    IFaSolidChartArea: typeof import('~icons/fa-solid/chart-area')['default']
-    IFaSolidEnvelope: typeof import('~icons/fa-solid/envelope')['default']
-    IFaSolidHome: typeof import('~icons/fa-solid/home')['default']
-    IFaSolidHouse: typeof import('~icons/fa-solid/house')['default']
-    IFaSolidTasks: typeof import('~icons/fa-solid/tasks')['default']
-    IFaSolidWallet: typeof import('~icons/fa-solid/wallet')['default']
+    LocationAutoComplete: typeof import('./components/LocationAutoComplete.vue')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SpinButton: typeof import('./components/SpinButton.vue')['default']
   }
 }
 

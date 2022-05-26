@@ -1,0 +1,109 @@
+/**
+Login styles
+*/
+
+.section-item {
+    .login-box {
+        position: absolute;
+        z-index: 5;
+        width: 560px;
+        top: 50%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        transform-origin: center center;
+        resize: both;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 25px 25px;
+        border-radius: 6px;
+        font-weight: bold;
+        box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.3);
+        -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.3);
+        -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+
+        @media (max-width: 1200px) {
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+        }
+        @media (max-width: 576px) {
+            width: 90%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+.section-item .login-box:hover {
+    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.section-item .login-box h1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+@media (max-width: 576px) {
+    .section-item .login-box h1 {
+        font-size: 20px;
+    }
+}
+
+.section-item .login-box label {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.section-item .login-box .fa {
+    color: gray;
+}
+
+.section-item .login-box .input-group {
+    border: 1px gray solid;
+    padding: 10px;
+}
+
+.section-item .login-box input {
+    border: none;
+    background-color: transparent;
+}
+
+.section-item .login-box input[type=text]:focus,
+input[type=password]:focus,
+input[type=datetime]:focus,
+input[type=datetime-local]:focus,
+input[type=date]:focus,
+input[type=month]:focus,
+input[type=time]:focus,
+input[type=week]:focus,
+input[type=number]:focus,
+input[type=email]:focus,
+input[type=url]:focus,
+input[type=search]:focus,
+input[type=tel]:focus,
+input[type=color]:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.section-item .login-box .hand-pointer {
+    cursor: pointer !important;
+}
+
+.section-item .login-box .btn-secondary {
+    background-color: #E83531;
+    border-color: #E83531;
+}
+

@@ -29,7 +29,7 @@ defineProps(['url'])
 const isNavOpen = ref(false)
 </script>
 <template>
-  <main :key="url">
+  <main :key="url" class="container w-full mx-auto">
     <Header />
     <div
       class="container w-full mx-auto pt-[7rem]"
@@ -38,7 +38,7 @@ const isNavOpen = ref(false)
       <div
         class="w-full px-4 md:px-0 md:mt-8 mb-16 text-gray-800 leading-normal"
       >
-        <RouterView />
+        <slot />
       </div>
     </div>
     <Footer />

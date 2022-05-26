@@ -8,13 +8,13 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Markdown from 'vite-plugin-md'
 import { VitePWA } from 'vite-plugin-pwa'
+import ssr from 'vite-plugin-ssr/plugin'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 import Prism from 'markdown-it-prism'
 import LinkAttributes from 'markdown-it-link-attributes'
-import WindiCSS from 'vite-plugin-windicss'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
+import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
+import Unocss from 'unocss/vite'
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
 
@@ -24,7 +24,13 @@ export default defineConfig({
       '~/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
-
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "bootstrap/scss/bootstrap";`,
+      },
+    },
+  },
   plugins: [
     Vue({
       include: [/\.vue$/, /\.md$/],
@@ -61,17 +67,9 @@ export default defineConfig({
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
-      resolvers: [
-        IconsResolver({
-          prefix: 'i',
-          enabledCollections: ['fa-solid', 'fa-regular'],
-        }),
-      ],
     }),
 
-    WindiCSS(),
-
-    Icons(),
+    Unocss(),
 
     // https://github.com/antfu/vite-plugin-md
     // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
@@ -130,6 +128,8 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-inspect
     // Visit http://localhost:3333/__inspect/ to see the inspector
     Inspect(),
+
+    ssr(),
   ],
 
   // https://github.com/antfu/vite-ssg
@@ -140,7 +140,24 @@ export default defineConfig({
       generateSitemap()
     },
   },
+  server: {
+    fs: {
+      strict: true,
+    },
+  },
 
+  optimizeDeps: {
+    include: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
+    exclude: ['vue-demi'],
+    esbuildOptions: {
+      plugins: [
+        esbuildCommonjs(['minimize']),
+        esbuildCommonjs(['bootstrap']),
+        esbuildCommonjs(['@fortawesome/fontawesome-free']),
+        esbuildCommonjs(['@popperjs/core']),
+      ],
+    },
+  },
   // https://github.com/vitest-dev/vitest
   test: {
     include: ['test/**/*.test.ts'],

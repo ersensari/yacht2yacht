@@ -10,12 +10,11 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div>
+  <div font-mono>
     <div text-4xl>
       <div i-carbon-pedestrian inline-block />
     </div>
-    <p>
-      {{ t('intro.hi', { name: props.name }) }}
+    <p v-html="t('yacht.min_price', { name: props.name })">
     </p>
 
     <p text-sm opacity-75>

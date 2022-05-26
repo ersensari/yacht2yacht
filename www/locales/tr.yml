@@ -1,14 +1,370 @@
-button:
-  about: Hakkımda
-  back: Geri
-  go: İLERİ
-  home: Anasayfa
-  toggle_dark: Karanlık modu değiştir
-  toggle_langs: Dilleri değiştir
-intro:
-  desc: Görüşlü Vite Başlangıç Şablonu
-  dynamic-route: Dinamik rota demosu
-  hi: Merhaba, {name}!
-  aka: Ayrıca şöyle bilinir
-  whats-your-name: Adınız nedir?
-not-found: Bulunamadı
+auth:
+  user_failed: Girilen e-posta adresi kayıtlarımızda bulunamadı.
+  password_failed: Girilen parola hatalı.
+  throttle: Çok fazla giriş denemesi yaptınız. Lütfen {seconds} saniye sonra deneyiniz.
+  notactivated: Kullanıcınız aktif değil
+  login: Giriş
+  register: Kayıt
+  logout: Çıkış
+  profile: Profilim
+  account: Hesabım
+  reservation_requests: Reservasyon Taleplerim
+  reservations: Reservasyonlarım
+  email_label: E-Posta Adresi
+  new_email_label: Yeni E-Posta Adresi
+  password_label: Parola
+  rememberme_label: Beni Hatırla
+  forgot_password_label: Parolamı Unuttum?
+  confirm_password_label: Parola (Tekrar)
+  login_button_label: Giriş
+  name_label: Ad, Soyad
+  cellphone_label: Cep Telefonu
+  gender_label: Cinsiyet
+  gender_male: Erkek
+  gender_female: Kadın
+  gender_other: Söylemek istemiyorum
+  birthdate_label: Doğum Tarihi
+  membership_start_date: Üyelik Tarihi
+  register_button_label: Kaydet
+  verify_your_email_address: E-Posta Adresinizi Doğrulayın
+  verification_message1: Yeni bir aktivasyon bağlantısı e-posta adresinize gönderildi.
+  verification_message2:
+    Sayfamızı kullanmaya başlamadan önce lütfen gönderdiğimiz
+    aktivasyon e-postasını kontrol ediniz.
+  verification_message3: Eğer aktivasyon e-postasını alamadıysanız
+  verification_message4: yeni bir aktivasyon bağlantısı talep etmek için tıklayınız
+  reset_password: Parola Sıfırla
+  send_password_button_label: Parola sıfırlama bağlantısı gönder
+  change_email: E-Posta adresi değiştir
+  send_email_change_link_button_label: E-Posta değiştirme bağlantısını gönder
+  email_dont_match: Giriş yaptığınız E-Posta adresini giriniz.
+  email_change_link_sent: E-Posta değiştirme bağlantınız {email} adresine gönderilmiştir.
+  change_email_button_label: Geçerli e-posta adresini {email} ile değiştir.
+  change_avatar: Profil Resmi
+  zoom_in: Yakınlaştır
+  zoom_out: Uzaklaştır
+  rotate_left: Sola Çevir
+  rotate_right: Sağa Çevir
+  reset: Sıfırla
+  upload_new: Yeni Yükle
+  preview: Önizleme
+  msg_please_select_an_image_file: Lütfen bir resim dosyası seçiniz
+  msg_avatar_has_been_changed: Profil fotoğrafınız değiştirildi.
+  addresses: Adreslerim
+  addr_title: Başlık
+  addr_address: Adres
+  addr_country: Ülke
+  addr_state: Şehir
+  addr_city: İlçe/Kasaba
+  explanation: Talep / Açıklamalar
+  charter_explanation: Tekne Sahibi Yanıtı
+  created_at: Oluşturma Tarihi
+  request_state: Durum
+  request_canceled: İptal Edildi
+  request_received: Yanıtlandı
+  request_awaiting: Bekliyor
+  yacht_title: Tekne
+  no_reservation_request_found: Rezervasyon Talep Kaydınız Bulunmuyor
+global:
+  turkey: Türkiye
+  search_button_label: Ara
+  search_box_header: Hayallerinizdeki tatil için eşsiz teknelerimize rezervasyon yapın...
+  search_box_location_label: Ülke, Şehir, Bölge
+  search_box_begin_date_label: Başlama Tarihi
+  search_box_end_date_label: Bitiş Tarihi
+  gototop_button_title: Yukarı
+  select_all: Tümünü Seç
+  transaction_completed: İşlem başarıyla tamamlandı
+  upload: Yükle
+  close: Kapat
+  change: Değiştir
+  select_default: '{attribute} Seçiniz'
+  save_changes: Değişiklikleri Kaydet
+  new: Yeni Ekle
+  edit: Düzenle
+  save: Kaydet
+  add: Ekle
+  delete: Sil
+  'yes': Evet
+  'no': Hayır
+  clear_filter_label: Kriterleri Temizle
+  go_back_button_label: Geri Dön
+  thanks_message: Teşekkürler
+  all_rights_reserved: Tüm hakları saklıdır.
+  delete_confirmation: '{title} silinecek! Emin misiniz?'
+  an_error_occurred: Opps!, Beklenmedik bir hata oluştu!
+  rent_yacht_url: tekne-kirala
+home:
+  banner1-text: Sizde Yatınızı Kiraya Verin Kazanmaya Başlayın!
+  banner1-button: Şimdi Başlayın
+  destination-croatia: HIRVATİSTAN
+  destination-greece: YUNANİSTAN
+  destination-turkey: TÜRKİYE
+menus:
+  i_am_yacht_charter: Yat Sahibiyim
+  owner_index: Gösterge Panosu
+  add_yacht: Tekne Ekleyin
+  my_records: Kayıtlarım
+  reservations: Rezervasyonlar
+  tours: Turlarım
+  messages: Mesajlarım
+  inbox: Gelen Kutusu
+  sent: Gönderilen
+  trash: Silinen
+  search: Arama
+  create_ad: İlan Ver
+messages:
+  message_search_placeHolder: Mesajlarda Ara
+  message_pagination_info: '{page_total} satırdan {page_from} - {page_to} arası'
+  message_selected_count: '({selected_count} mesaj seçili)'
+  can_be_edited_only_by_message_owner: Sadece mesaj sahibi tarafından işlem yapılabilir
+  selected_item(s)_deleted: Seçilen mesaj(lar) silindi
+  delete_message_title: Mesaj Sil
+  from: Kimden
+  to: Kime
+  re: 'Ynt:'
+  title: Konu
+  inbox_folder: Gelen
+  sent_folder: Gönderilen
+  trash_folder: Silinen
+  no_messages_in_trash: Silinen mesajınız yok
+  no_messages_in_inbox: Gelen mesajınız yok
+  no_messages_in_sent: Gönderilmiş mesajınız yok
+  no_messages_found: Mesaj bulunamadı
+  reply_success_message: Mesajınız Gönderildi
+  select: Seç
+  refresh: Yenile
+  delete: Sil
+  more: Daha
+  empty_trash: Çöp Kutusunu Boşalt
+  reply: Cevapla
+  select_all: Tümü
+  select_none: Hiçbiri
+  select_read: Okunanlar
+  select_unread: Okunmayanlar
+  select_starred: Yıldızlılar
+  select_starless: Yıldızsızlar
+  mark_all_as_read: Tümünü okundu olarak işaretle
+  mark_as_read: Okundu olarak işaretle
+  mark_as_unread: Okunmadı olarak işaretle
+  mark_as_important: Önemli olarak işaretle
+  mark_as_not_important: Önemsiz olarak işaretle
+  add_star: Yıldız ekle
+  remove_star: Yıldız kaldır
+  more_actions_description: Daha fazla işlem için mesaj seçiniz
+pagination:
+  previous: Önceki Sayfa
+  next: Sonraki Sayfa
+  first: İlk Sayfa
+  last: Son Sayfa
+passwords:
+  reset: Parolanız sıfırlandı!
+  sent: Parola sıfırlama e-postası gönderildi. E-posta kutunuzu kontrol ediniz.
+  throttled: Tekrar denemeden önce lütfen biraz bekleyiniz.
+  token: Parola yenileme kodu geçersiz.
+  user: Girdiğiniz e-posta adresi sistemimizde bulunamadı.
+search:
+  yacht_rent_header: '{location} Tekne - Yat Kiralama'
+  detail_search_header: Detaylı Arama
+  date_range: Tarih Aralığı
+  number_of_guests: Misafir Sayısı
+  person: Kişi
+  price: Fiyat
+  daily: Günlük
+  length: Uzunluk
+  number_of_cabins: Kamara Sayısı
+  by_adnumber_header: İlan No İle Arama
+  ad_number_label: İlan Numarası
+  show_only_available: Sadece Müsait Olanları Göster
+  no_record_found: Aradığınız kriterlere uygun tekne bulunamadı.
+  change_your_criteria: Arama kriterlerinizi değiştirerek tekrar deneyin.
+  orderby_label: 'Sıralama:'
+  orderby_option_price_desc: Fiyata Göre (Önce En Yüksek)
+  orderby_option_price_asc: Fiyata Göre (Önce En Düşük)
+  orderby_option_date_desc: Tarihe Göre (Önce En Yeni İlan)
+  orderby_option_date_asc: Tarihe Göre (Önce En Eski İlan)
+  request_offer: Teklif Alınız
+  detail_button_label: Ayrıntılar
+  price_begins_from: "'dan başlayan fiyatlarla"
+  begin_date: Başlama
+  end_date: Bitiş
+  request_offer_button_label: Teklif Al
+  how_it_works_button_label: Nasıl Çalışır
+  ask_to_charter_button_label: Tekne Sahibine Soru Sor
+  renting_description_weekly:
+    Bu tekneyi <strong>{day}</strong> gününden başlayarak
+    <strong>haftalık</strong> olarak kiralayabilirsiniz.
+  renting_description_daily:
+    Bu tekneyi en az <strong>{day} gün</strong> süre ile
+    <strong>günlük</strong> olarak kiralayabilirsiniz.
+  customer_explanation_placeholder:
+    Tekne sahibine mesajınızı veya taleplerinizi iletebilir,
+    rota, yemek, bölge vb. detayları öğrenebilir. İsterseniz farklı opsiyonlar talep
+    edebilirsiniz.
+  create_request_button_label: Talep Oluştur
+  request_created_mail_title: '#{id} numaralı rezervasyon teklif talebiniz alınmıştır.'
+  request_created_explanation:
+    "#{id} numaralı rezervasyon teklif talebiniz alınmıştır.
+    Tekne sahibi en kısa zamanda size mesaj yolu ile ulaşacaktır.<br/>\r\n        Teklif
+    taleplerinizi <a href=\"{account_url}\">Hesabım</a> sayfanızdan takip edebilirsiniz.
+    Aynı zamanda <a href=\"{messages_url}\">Mesajlarım</a> sayfanıza ve {email} adresinize
+    talep bilgileriniz gönderilmiştir.\r\n        <br/><br/>Teşekkür ederiz."
+  new_request_mail_title: '#{id} numaralı rezervasyon teklif talebi alındı.'
+  new_request_mail_body:
+    '#{id} numaralı rezervasyon teklif talebi alındı.<br/>Lütfen
+    <a href="{reservation_requests_url}">Rezervasyon Talepleri</a> sayfasını kontrol
+    ediniz.'
+validation:
+  accepted: The {attribute} must be accepted.
+  active_url: The {attribute} is not a valid URL.
+  after: The {attribute} must be a date after {date}.
+  after_or_equal: The {attribute} must be a date after or equal to {date}.
+  alpha: The {attribute} may only contain letters.
+  alpha_dash: The {attribute} may only contain letters, numbers, dashes and underscores.
+  alpha_num: The {attribute} may only contain letters and numbers.
+  array: The {attribute} must be an array.
+  before: The {attribute} must be a date before {date}.
+  before_or_equal: The {attribute} must be a date before or equal to {date}.
+  between:
+    numeric: The {attribute} must be between {min} and {max}.
+    file: The {attribute} must be between {min} and {max} kilobytes.
+    string: The {attribute} must be between {min} and {max} characters.
+    array: The {attribute} must have between {min} and {max} items.
+  boolean: The {attribute} field must be true or false.
+  confirmed: Girilen {attribute} birbiri ile uyumsuz.
+  date: Girilen {attribute} geçerli bir tarih değil.
+  date_equals: The {attribute} must be a date equal to {date}.
+  date_format: The {attribute} does not match the format {format}.
+  different: The {attribute} and {other} must be different.
+  digits: The {attribute} must be {digits} digits.
+  digits_between: The {attribute} must be between {min} and {max} digits.
+  dimensions: The {attribute} has invalid image dimensions.
+  distinct: The {attribute} field has a duplicate value.
+  email: Geçerli bir {attribute} giriniz.
+  ends_with: 'The {attribute} must end with one of the following: {values}.'
+  exists: The selected {attribute} is invalid.
+  file: The {attribute} must be a file.
+  filled: The {attribute} field must have a value.
+  gt:
+    numeric: The {attribute} must be greater than {value}.
+    file: The {attribute} must be greater than {value} kilobytes.
+    string: The {attribute} must be greater than {value} characters.
+    array: The {attribute} must have more than {value} items.
+  gte:
+    numeric: The {attribute} must be greater than or equal {value}.
+    file: The {attribute} must be greater than or equal {value} kilobytes.
+    string: The {attribute} must be greater than or equal {value} characters.
+    array: The {attribute} must have {value} items or more.
+  image: The {attribute} must be an image.
+  in: The selected {attribute} is invalid.
+  in_array: The {attribute} field does not exist in {other}.
+  integer: '{attribute} rakam olmak zorunda.'
+  ip: The {attribute} must be a valid IP address.
+  ipv4: The {attribute} must be a valid IPv4 address.
+  ipv6: The {attribute} must be a valid IPv6 address.
+  json: The {attribute} must be a valid JSON string.
+  lt:
+    numeric: The {attribute} must be less than {value}.
+    file: The {attribute} must be less than {value} kilobytes.
+    string: The {attribute} must be less than {value} characters.
+    array: The {attribute} must have less than {value} items.
+  lte:
+    numeric: The {attribute} must be less than or equal {value}.
+    file: The {attribute} must be less than or equal {value} kilobytes.
+    string: The {attribute} must be less than or equal {value} characters.
+    array: The {attribute} must not have more than {value} items.
+  max:
+    numeric: The {attribute} may not be greater than {max}.
+    file: The {attribute} may not be greater than {max} kilobytes.
+    string: The {attribute} may not be greater than {max} characters.
+    array: The {attribute} may not have more than {max} items.
+  mimes: 'The {attribute} must be a file of type: {values}.'
+  mimetypes: 'The {attribute} must be a file of type: {values}.'
+  min:
+    numeric: '{attribute} en az {min} olmalı.'
+    file: '{attribute} dosyası en az {min} KB olmalı.'
+    string: '{attribute} en az {min} karakter olmalı.'
+    array: '{attribute} en az {min} nesne içermeli.'
+  not_in: The selected {attribute} is invalid.
+  not_regex: The {attribute} format is invalid.
+  numeric: '{attribute} rakam olmak zorunda.'
+  password: Parola geçersiz.
+  present: The {attribute} field must be present.
+  regex: The {attribute} format is invalid.
+  required: '{attribute} zorunlu.'
+  required_if: The {attribute} field is required when {other} is {value}.
+  required_unless: The {attribute} field is required unless {other} is in {values}.
+  required_with: The {attribute} field is required when {values} is present.
+  required_with_all: The {attribute} field is required when {values} are present.
+  required_without: The {attribute} field is required when {values} is not present.
+  required_without_all:
+    The {attribute} field is required when none of {values} are
+    present.
+  same: The {attribute} and {other} must match.
+  size:
+    numeric: The {attribute} must be {size}.
+    file: The {attribute} must be {size} kilobytes.
+    string: The {attribute} must be {size} characters.
+    array: The {attribute} must contain {size} items.
+  starts_with: 'The {attribute} must start with one of the following: {values}.'
+  string: The {attribute} must be a string.
+  timezone: The {attribute} must be a valid zone.
+  unique: Girilen {attribute} için zaten bir kayıt oluşturulmuş.
+  uploaded: '{attribute} yüklenirken bir hata oluştyu.'
+  url: '{attribute} adres biçimi geçerli değil.'
+  uuid: '{attribute} geçerli bir UUID olmalı.'
+  custom:
+    attribute-name:
+      rule-name: custom-message
+  attributes:
+    email: e-posta
+    password: parola
+yacht:
+  can_be_edited_only_by_yacht_owner:
+    Sadece tekne sahibi tekneleri üzerinde düzenleme
+    yapabilir.
+  edit_yacht: Tekne Düzenle
+  step_addresses: Konum
+  step_general: Genel Bilgiler
+  step_photos: Fotoğraflar
+  step_features: Özellikler
+  step_prices: Fiyatlandırma
+  step_off_dates: Kapalı Tarihler
+  step_preview: Önizleme & Yayınlama
+  button_back: Önceki
+  button_next_save: Kaydet ve İlerle
+  button_publish: Yayınla
+  title: Adı
+  daily_rental: Günlük Kiraya Vermek İstiyor musunuz?
+  description: Açıklama
+  price_begin_day_0: Pazar
+  price_begin_day_1: Pazartesi
+  price_begin_day_2: Salı
+  price_begin_day_3: Çarşamba
+  price_begin_day_4: Perşembe
+  price_begin_day_5: Cuma
+  price_begin_day_6: Cumartesi
+  price_currency: Para Birimi
+  price_begin_day: Başlangıç Günü
+  price_min_day: En Az Gün Sayısı
+  price_type: Fiyatlandırma Türü
+  price_type_1: Günlük
+  price_type_2: Haftalık
+  can_be_uploaded_max_ten_photos: En fazla 20 adet fotoğraf yükleyebilirsiniz.
+  upload_new: Yükle
+  price_description: Fiyatlandırma Açıklaması
+  price: Ücret
+  begin_date: Başlangıç Tarihi
+  end_date: Bitiş Tarihi
+  approved: Onaylandı
+  unapproved: Onay Bekliyor
+  publish: Yayınla
+  unpublish: Yayından Kaldır
+  published: Yayınlandı
+  unpublished: Yayında Değil
+  specifications: Özellikler
+  min_price:
+    <div class="yacht-min-price"><span class="price">{price}</span> <span
+    class="currency"> {currency}</span><span class="desc">'den başlayan fiyatlarla</span></div>
+nav:
+  toggle_navigation: Gezinmeyi Aç/Kapat

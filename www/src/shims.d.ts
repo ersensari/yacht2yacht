@@ -1,5 +1,8 @@
 declare interface Window {
   // extend the window
+  richSnippetReviewsWidgets: any
+  carouselInlineWidget: any
+  Beacon: any
 }
 
 // with vite-plugin-md, markdown files can be treated as Vue components
@@ -14,3 +17,6 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+declare module 'minimize';
+declare module 'bootstrap';
