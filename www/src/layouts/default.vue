@@ -30,7 +30,7 @@ const isNavOpen = ref(false)
 </script>
 <template>
   <main :key="url" class="container w-full mx-auto">
-    <Header />
+    <Header :url="url" />
     <div
       class="container w-full mx-auto pt-[7rem]"
       :class="{ 'h-0': isNavOpen, 'overflow-hidden': isNavOpen }"
@@ -42,8 +42,5 @@ const isNavOpen = ref(false)
       </div>
     </div>
     <Footer />
-    <div class="mt-5 mx-auto text-center opacity-75 dark:opacity-50 text-sm">
-      [Default Layout]
-    </div>
   </main>
 </template>

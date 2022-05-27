@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const router = useRouter()
 const { t } = useI18n()
 </script>
 
@@ -8,9 +7,9 @@ const { t } = useI18n()
     <div text-4xl>
       <div i-carbon-warning inline-block />
     </div>
-    <RouterView />
+    <slot />
     <div>
-      <button btn text-sm m="3 t8" @click="router.back()">
+      <button btn text-sm m="3 t8" onclick="window.location.back(-1)">
         {{ t('button.back') }}
       </button>
     </div>

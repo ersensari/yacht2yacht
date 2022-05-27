@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { navigate } from 'vite-plugin-ssr/client/router'
+
 const { t, locale } = useI18n()
 const emit = defineEmits(['input'])
 const props = defineProps({
@@ -38,14 +40,13 @@ watch(props.value, (value) => {
 })
 
 const orderby = computed(() => 'name')
-const router = useRouter()
 
 const onSearch = () => {
   if (
     data.geolocation.selected !== null &&
     (props.onselectsearch || props.onentersearch)
   ) {
-    router.push(
+    navigate(
       `/${locale.value}/${t('global.rent_yacht_url')}/${
         data.geolocation.selected.seo_name
       }?sort=${orderby}`,

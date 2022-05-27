@@ -13,6 +13,7 @@ export const passToClient = ['pageProps', 'documentProps', 'url']
 
 async function render(pageContext: PageContextBuiltIn & PageContext) {
   const { app, head } = createApp(pageContext)
+
   const appHtml = await renderToString(app)
   const { headTags, htmlAttrs, bodyAttrs } = renderHeadToString(head)
   const contentHtml = `

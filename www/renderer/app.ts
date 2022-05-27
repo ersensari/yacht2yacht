@@ -3,8 +3,8 @@ import { createHead } from '@vueuse/head'
 import { setPageContext } from './usePageContext'
 import type { Component, PageContext } from '~/types'
 import DefaultLayout from '~/layouts/default.vue'
-
-//import 'bootstrap'
+import { createPinia } from 'pinia'
+import devalue from '@nuxt/devalue'
 
 import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
 import '@fortawesome/fontawesome-free/scss/solid.scss';
@@ -46,6 +46,11 @@ function createApp(pageContext: PageContext) {
   const app = createSSRApp(PageWithLayout)
   const head = createHead()
   app.use(head)
+
+  const pinia = createPinia()
+  app.use(pinia)
+
+  devalue(pinia.state.value)
 
   // Install all modules under `modules/`
   Object.values(import.meta.globEager('../src/modules/*.ts')).forEach(i =>

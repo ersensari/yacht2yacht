@@ -2,7 +2,8 @@ declare interface Window {
   // extend the window
   richSnippetReviewsWidgets: any
   carouselInlineWidget: any
-  Beacon: any
+  Beacon: any,
+  __pinia: any
 }
 
 // with vite-plugin-md, markdown files can be treated as Vue components

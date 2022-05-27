@@ -27,12 +27,12 @@ const toggleLocales = () => {
             <h3 class="font-bold font-bold text-gray-900">Social</h3>
             <ul class="list-reset items-center text-sm pt-3">
               <li>
-                <RouterLink
+                <a
                   class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:underline py-1"
-                  to="/about"
+                  href="/about"
                 >
                   {{ t('button.about') }}
-                </RouterLink>
+                </a>
               </li>
               <li>
                 <a

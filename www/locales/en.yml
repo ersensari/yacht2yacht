@@ -1,3 +1,16 @@
+button:
+  about: About
+  back: Back
+  go: GO
+  home: Home
+  toggle_dark: Toggle dark mode
+  toggle_langs: Change languages
+intro:
+  desc: Google Tag Management Demo Project
+  hi: 'Postcode: {postcode}!'
+  post-code: What's your postcode?
+  title: Price
+not-found: Not found
 auth:
   user_failed: This email do not match our records.
   password_failed: This password do not match our records.
@@ -364,4 +377,4 @@ yacht:
     <div class="yacht-min-price"><span class="desc">Prices from </span><span
     class="price">{price}</span> <span class="currency"> {currency}</span></div>
 nav:
- toggle_navigation: Toggle Navigation
+  toggle_navigation: Toggle Navigation

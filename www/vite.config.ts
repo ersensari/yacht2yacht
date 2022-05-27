@@ -153,7 +153,6 @@ export default defineConfig({
       plugins: [
         esbuildCommonjs(['minimize']),
         esbuildCommonjs(['bootstrap']),
-        esbuildCommonjs(['@fortawesome/fontawesome-free']),
         esbuildCommonjs(['@popperjs/core']),
       ],
     },

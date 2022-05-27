@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{ name: string }>()
-const router = useRouter()
 const user = useUserStore()
-const { t } = useI18n()
+const { t,locale } = useI18n()
 
 watchEffect(() => {
   user.setNewName(props.name)
@@ -26,9 +25,9 @@ watchEffect(() => {
         <span opacity-75>{{ t('intro.aka') }}:</span>
         <ul>
           <li v-for="otherName in user.otherNames" :key="otherName">
-            <router-link :to="`/hi/${otherName}`" replace>
+            <a :href="toHref({path:'/name',params:{ locale,name: otherName}})" replace>
               {{ otherName }}
-            </router-link>
+            </a>
           </li>
         </ul>
       </p>
@@ -37,7 +36,7 @@ watchEffect(() => {
     <div>
       <button
         btn m="3 t6" text-sm
-        @click="router.back()"
+        onclick="window.location.back(-1)"
       >
         {{ t('button.back') }}
       </button>

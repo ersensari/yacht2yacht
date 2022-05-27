@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t, availableLocales, locale } = useI18n()
+const props = defineProps(['url'])
 
 const language: { [key: string]: string } = { en: 'English', tr: 'Türkçe' }
 const currencies: { [key: string]: string } = {
@@ -20,9 +21,10 @@ const currency = computed({
 })
 
 const localeName = computed(() => language[locale.value])
-const router = useRouter()
+
 const getLanguagePath = (newLanguage: string) => {
-  const currentPath = router.currentRoute.value.path
+  if (!props.url) return '/' + locale.value
+  const currentPath = props.url
   const languageDetector = new RegExp(`^\/(${availableLocales.join('|')})?\/?`)
   let newPath
 
@@ -49,12 +51,12 @@ const getLanguagePath = (newLanguage: string) => {
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <router-link
+        <a
           class="navbar-brand p-2"
-          :to="{ path: 'home', params: { locale } }"
+          :href="toHref({ path: 'home', params: { locale } })"
         >
           <img class="navbar-logo" src="/images/logo.png" alt="Yacht2Yacht" />
-        </router-link>
+        </a>
         <div class="p-2 flex-grow-1">
           <location-auto-complete
             name="location"
@@ -84,14 +86,14 @@ const getLanguagePath = (newLanguage: string) => {
                   class="dropdown-menu dropdown-menu-right"
                   aria-labelledby="langMenu"
                 >
-                  <router-link
-                    :to="getLanguagePath(lang)"
+                  <a
+                    :href="getLanguagePath(lang)"
                     class="dropdown-item"
                     v-for="lang in availableLocales"
                     :key="lang"
                   >
                     {{ language[lang] }}
-                  </router-link>
+                  </a>
                 </div>
               </li>
               <!--Currency Menu-->
@@ -135,31 +137,35 @@ const getLanguagePath = (newLanguage: string) => {
               <!-- Authentication Links -->
               <!-- @guest -->
               <li class="nav-item flex-grow-1">
-                <router-link
+                <a
                   class="nav-link"
-                  :to="{
-                    path: 'login',
-                    params: { locale },
-                    query: { url: $route.fullPath },
-                  }"
+                  :href="
+                    toHref({
+                      path: '/login',
+                      params: { locale },
+                      query: { url },
+                    })
+                  "
                 >
                   <i class="fas fa-sign-in-alt me-2"></i>
                   {{ t('auth.login') }}
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link
-                  class="nav-link"
-                  :to="{ path: '/register', params: { locale } }"
-                >
-                  <i class="fas fa-user-plus me-2"></i>
-                  {{ t('auth.register') }}
-                </router-link>
+                </a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  :to="{ path: 'yacht_owner_intro', params: { locale } }"
+                  :href="toHref({ path: '/register', params: { locale } })"
+                >
+                  <i class="fas fa-user-plus me-2"></i>
+                  {{ t('auth.register') }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  :href="
+                    toHref({ path: 'yacht_owner_intro', params: { locale } })
+                  "
                 >
                   <span class="text-red">
                     <i class="fas fa-bullhorn me-2"></i>
