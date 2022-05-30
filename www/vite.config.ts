@@ -4,13 +4,16 @@ import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import generateSitemap from 'vite-ssg-sitemap'
 import Layouts from 'vite-plugin-vue-layouts'
+import svgLoader from 'vite-svg-loader'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import Icons from 'unplugin-icons/vite'
 import Markdown from 'vite-plugin-md'
 import { VitePWA } from 'vite-plugin-pwa'
 import ssr from 'vite-plugin-ssr/plugin'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
+
 import Prism from 'markdown-it-prism'
 import LinkAttributes from 'markdown-it-link-attributes'
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
@@ -24,13 +27,7 @@ export default defineConfig({
       '~/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "bootstrap/scss/bootstrap";`,
-      },
-    },
-  },
+
   plugins: [
     Vue({
       include: [/\.vue$/, /\.md$/],
@@ -68,7 +65,7 @@ export default defineConfig({
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
     }),
-
+    Icons({ prefix: 'ico' } as any),
     Unocss(),
 
     // https://github.com/antfu/vite-plugin-md
@@ -120,7 +117,8 @@ export default defineConfig({
 
     // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
     VueI18n({
-      runtimeOnly: true,
+      runtimeOnly: false,
+      globalSFCScope:true,
       compositionOnly: true,
       include: [path.resolve(__dirname, 'locales/**')],
     }),
@@ -128,6 +126,10 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-inspect
     // Visit http://localhost:3333/__inspect/ to see the inspector
     Inspect(),
+
+    svgLoader({
+      svgo: false,
+    }),
 
     ssr(),
   ],
@@ -144,17 +146,14 @@ export default defineConfig({
     fs: {
       strict: true,
     },
+    force: true,
   },
 
   optimizeDeps: {
     include: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
     exclude: ['vue-demi'],
     esbuildOptions: {
-      plugins: [
-        esbuildCommonjs(['minimize']),
-        esbuildCommonjs(['bootstrap']),
-        esbuildCommonjs(['@popperjs/core']),
-      ],
+      plugins: [esbuildCommonjs(['minimize'])],
     },
   },
   // https://github.com/vitest-dev/vitest

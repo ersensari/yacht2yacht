@@ -1,62 +1,48 @@
 <script setup lang="ts">
-const { t, availableLocales, locale } = useI18n()
-const props = defineProps(['url'])
-
-const language: { [key: string]: string } = { en: 'English', tr: 'Türkçe' }
-const currencies: { [key: string]: string } = {
-  TRY: 'fas fa-turkish-lira-sign',
-  USD: 'fas fa-dollar-sign',
-  EUR: 'fas fa-euro-sign',
-}
-const currencyCookie = useLocalStorage('currency', 'USD')
-
-const currency = computed({
-  get: () => {
-    return currencies[currencyCookie.value]
-  },
-  set: (v: string) => {
-    currencyCookie.value = v
-    return v
-  },
-})
-
-const localeName = computed(() => language[locale.value])
-
-const getLanguagePath = (newLanguage: string) => {
-  if (!props.url) return '/' + locale.value
-  const currentPath = props.url
-  const languageDetector = new RegExp(`^\/(${availableLocales.join('|')})?\/?`)
-  let newPath
-
-  newPath = currentPath.replace(languageDetector, `/${newLanguage}/`)
-
-  if (currentPath !== newPath) {
-    locale.value = newLanguage
-  }
-  return newPath
-}
+const { t } = useI18n()
+const props = defineProps<{ url: string }>()
 </script>
 <template>
   <header>
-    <nav class="navbar navbar-expand-xl navbar-light bg-navbar">
-      <div class="d-flex flex-fill align-items-center justify-content-between">
-        <button
-          class="navbar-toggler p-2"
-          type="button"
-          aria-controls="navbarTogglerMain"
-          aria-expanded="false"
-          :aria-label="t('nav.toggle_navigation')"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerMain"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a
-          class="navbar-brand p-2"
-          :href="toHref({ path: 'home', params: { locale } })"
-        >
-          <img class="navbar-logo" src="/images/logo.png" alt="Yacht2Yacht" />
+    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+      <div class="container flex flex-wrap justify-between items-center mx-auto">
+        <a class="flex items-center" :href="toHref({ path: '/' })">
+          <img class="mr-3 h-6 sm:h-9" src="/images/logo.svg?url" alt="Yacht2Yacht" />
         </a>
+        <!-- Mobil menu button -->
+        <button
+          data-collapse-toggle="mobile-menu"
+          type="button"
+          class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="sr-only">{{ t('nav.toggle_navigation') }}</span>
+          <svg
+            class="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <svg
+            class="hidden w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
         <div class="p-2 flex-grow-1">
           <location-auto-complete
             name="location"
@@ -64,192 +50,15 @@ const getLanguagePath = (newLanguage: string) => {
             :onselectsearch="true"
           />
         </div>
-
-        <!-- Right Side Of Navbar -->
-        <div class="ms-auto">
-          <div class="collapse navbar-collapse" id="navbarTogglerMain">
-            <div class="me-auto"></div>
-            <ul class="navbar-nav mb-2 mb-lg-0">
-              <!--Language Menu-->
-              <li class="nav-item dropdown flex-grow-1">
-                <a
-                  href="#"
-                  class="nav-link dropdown-toggle"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  id="langMenu"
-                >
-                  <i class="fas fa-language fa-lg me-1" aria-hidden="true"></i>
-                  {{ localeName }}
-                </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right"
-                  aria-labelledby="langMenu"
-                >
-                  <a
-                    :href="getLanguagePath(lang)"
-                    class="dropdown-item"
-                    v-for="lang in availableLocales"
-                    :key="lang"
-                  >
-                    {{ language[lang] }}
-                  </a>
-                </div>
-              </li>
-              <!--Currency Menu-->
-              <li class="nav-item dropdown flex-grow-1">
-                <a
-                  href="#"
-                  class="nav-link dropdown-toggle"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  id="currencyMenu"
-                >
-                  <i
-                    :class="currency"
-                    class="fa-lg me-1"
-                    aria-hidden="true"
-                  ></i>
-                </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right"
-                  aria-labelledby="currencyMenu"
-                >
-                  <button
-                    @click="
-                      () => {
-                        currency = curr
-                      }
-                    "
-                    class="btn-link dropdown-item"
-                    v-for="curr in Object.keys(currencies)"
-                  >
-                    <i
-                      :class="currencies[curr]"
-                      class="fa-lg me-1"
-                      aria-hidden="true"
-                    ></i>
-                    {{ curr }}
-                  </button>
-                </div>
-              </li>
-
-              <!-- Authentication Links -->
-              <!-- @guest -->
-              <li class="nav-item flex-grow-1">
-                <a
-                  class="nav-link"
-                  :href="
-                    toHref({
-                      path: '/login',
-                      params: { locale },
-                      query: { url },
-                    })
-                  "
-                >
-                  <i class="fas fa-sign-in-alt me-2"></i>
-                  {{ t('auth.login') }}
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :href="toHref({ path: '/register', params: { locale } })"
-                >
-                  <i class="fas fa-user-plus me-2"></i>
-                  {{ t('auth.register') }}
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  :href="
-                    toHref({ path: 'yacht_owner_intro', params: { locale } })
-                  "
-                >
-                  <span class="text-red">
-                    <i class="fas fa-bullhorn me-2"></i>
-                    {{ t('menus.create_ad') }}
-                  </span>
-                </a>
-              </li>
-
-              <!-- @else 
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="{{ route('yacht_owner', app()->getlocale()) }}"
-                >
-                  <span class="text-red">
-                    <i class="fas fa-bullhorn me-2"></i>
-                    {{ __('menus.create_ad') }}
-                  </span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="{{ route('message_inbox', app()->getlocale()) }}"
-                >
-                  {{ __('menus.messages') }}
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  id="userMenu"
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  v-pre
-                >
-                  <img
-                    src="{{ Auth::user()->avatar != '' ? Auth::user()->avatar : asset('/images/avatar.png') }}"
-                    alt="{{ Auth::user()->name }}"
-                    class="rounded-circle user-image"
-                  />
-                  {{ Auth::user()->name }}
-                </a>
-
-                <div
-                  class="dropdown-menu dropdown-menu-right"
-                  aria-labelledby="userMenu"
-                >
-                  <a
-                    class="dropdown-item"
-                    href="{{ route('profile', app()->getlocale()) }}"
-                  >
-                    {{ __('auth.profile') }}
-                  </a>
-                  <a
-                    class="dropdown-item"
-                    href="{{ route('account', app()->getlocale()) }}"
-                  >
-                    {{ __('auth.account') }}
-                  </a>
-                  <a
-                    class="dropdown-item"
-                    href="{{ route('logout', app()->getlocale()) }}"
-                    onclick="event.preventDefault();
-                                                                                                                                                                                                                                    document.getElementById('logout-form').submit();"
-                  >
-                    {{ __('auth.logout') }}
-                  </a>
-
-                  <form
-                    id="logout-form"
-                    action="{{ route('logout', app()->getlocale()) }}"
-                    method="POST"
-                    style="display: none;"
-                  >
-                  </form>
-                </div>
-              </li>
-              @endguest-->
-            </ul>
-          </div>
+        <div class="hidden w-full md:block md:w-auto" id="mobile-menu">
+          <ul
+            class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium"
+          >
+            <locale-menu-item :url="props.url" />
+            <currency-menu-item />
+            <guest-menu :url="props.url" v-if="1 === 1" />
+            <user-menu v-else />
+          </ul>
         </div>
       </div>
     </nav>

@@ -30,20 +30,21 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
       <meta name="msapplication-TileColor" content="#00aba9">
       <meta name="theme-color" content="#ffffff">
       <meta name="color-scheme" content="light only">
+      <base href="/" />
     </head>
     <body ${bodyAttrs}>
       <div id="app">${appHtml}</div>
     </body>
   </html>`
 
-  const documentHtml = dangerouslySkipEscape(new Minimize(
-    {
+  const documentHtml = dangerouslySkipEscape(
+    new Minimize({
       quotes: true,
       spare: true,
       comments: true,
       empty: true,
-    },
-  ).parse(contentHtml))
+    }).parse(contentHtml),
+  )
 
   return {
     documentHtml,

@@ -6,13 +6,17 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Counter: typeof import('./components/Counter.vue')['default']
+    CurrencyMenuItem: typeof import('./components/CurrencyMenuItem.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
+    GuestMenu: typeof import('./components/GuestMenu.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
+    LocaleMenuItem: typeof import('./components/LocaleMenuItem.vue')['default']
     LocationAutoComplete: typeof import('./components/LocationAutoComplete.vue')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SpinButton: typeof import('./components/SpinButton.vue')['default']
+    UserMenu: typeof import('./components/UserMenu.vue')['default']
   }
 }
 

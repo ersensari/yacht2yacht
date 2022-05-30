@@ -6,14 +6,8 @@ import DefaultLayout from '~/layouts/default.vue'
 import { createPinia } from 'pinia'
 import devalue from '@nuxt/devalue'
 
-import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
-import '@fortawesome/fontawesome-free/scss/solid.scss';
-import '@fortawesome/fontawesome-free/scss/regular.scss';
-import '@fortawesome/fontawesome-free/scss/brands.scss';
-
 import '@unocss/reset/tailwind.css'
 import '~/assets/styles/fonts.scss'
-import '~/assets/styles/app.scss'
 import 'uno.css'
 
 export { createApp }
@@ -32,7 +26,7 @@ function createApp(pageContext: PageContext) {
     render() {
       return h(
         DefaultLayout,
-        { layout: this.pageProps.layout, url: this.pageProps.url },
+        { layout: this.pageProps.layout, url: this.pageProps.url || '' },
         {
           default: () => {
             return h(this.Page, this.pageProps)
@@ -53,7 +47,7 @@ function createApp(pageContext: PageContext) {
   devalue(pinia.state.value)
 
   // Install all modules under `modules/`
-  Object.values(import.meta.globEager('../src/modules/*.ts')).forEach(i =>
+  Object.values(import.meta.globEager('../src/modules/*.ts')).forEach((i) =>
     i.install?.({ app, isClient }),
   )
 
@@ -78,6 +72,9 @@ function createApp(pageContext: PageContext) {
 }
 
 // Same as `Object.assign()` but with type inference
-function objectAssign<Obj, ObjAddendum>(obj: Obj, objAddendum: ObjAddendum): asserts obj is Obj & ObjAddendum {
+function objectAssign<Obj, ObjAddendum>(
+  obj: Obj,
+  objAddendum: ObjAddendum,
+): asserts obj is Obj & ObjAddendum {
   Object.assign(obj, objAddendum)
 }

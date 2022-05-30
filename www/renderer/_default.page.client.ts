@@ -3,10 +3,9 @@ import { useClientRouter } from 'vite-plugin-ssr/client/router'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client/router'
 import { createApp } from './app'
 import type { PageContext } from '~/types'
-import 'bootstrap'
+import 'flowbite'
 
 import NProgress from 'nprogress'
-
 
 let app: any
 const { hydrationPromise } = useClientRouter({
@@ -16,8 +15,7 @@ const { hydrationPromise } = useClientRouter({
       app = result.app
       app.mount('#app')
       registerSW({ immediate: true })
-    }
-    else {
+    } else {
       app.changePage(pageContext)
     }
   },

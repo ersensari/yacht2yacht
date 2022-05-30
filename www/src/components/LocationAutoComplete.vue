@@ -93,7 +93,7 @@ onMounted(() => {
       <div
         class="input-group d-flex align-items-center location-auto-complete-control"
       >
-        <i class="fas fa-map-marker-alt"></i>
+        <div ico-mdi-map-marker/>
         <input
           class="form-control"
           type="search"
@@ -111,7 +111,7 @@ onMounted(() => {
           class="btn btn-sm bg-transparent"
           @click="selectLocation(null)"
         >
-          <i class="fas fa-times"></i>
+          <div ico-mdi-close/>
         </button>
       </div>
 
@@ -131,7 +131,7 @@ onMounted(() => {
             @click="selectLocation(item)"
             :key="item.id"
           >
-            <i class="fas fa-map-marker-alt mx-2"></i>
+            <div ico-mdi-map />
             {{ item.name }}
           </a>
         </ul>

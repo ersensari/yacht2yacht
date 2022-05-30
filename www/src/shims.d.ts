@@ -1,3 +1,4 @@
+/// <reference types="vite-svg-loader" />
 declare interface Window {
   // extend the window
   richSnippetReviewsWidgets: any
@@ -20,4 +21,4 @@ declare module '*.vue' {
 }
 
 declare module 'minimize';
-declare module 'bootstrap';
+declare module 'flowbite';
