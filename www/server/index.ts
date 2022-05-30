@@ -15,8 +15,7 @@ async function startServer() {
   let viteDevServer
   if (isProduction) {
     app.use(express.static(`${root}/dist/client`))
-  }
-  else {
+  } else {
     const vite = require('vite')
     viteDevServer = await vite.createServer({
       root,
@@ -25,8 +24,12 @@ async function startServer() {
     app.use(viteDevServer.middlewares)
   }
 
-  const renderPage = createPageRenderer({ viteDevServer, isProduction, root })
-  app.get('*', async(req, res, next) => {
+  const renderPage = createPageRenderer({
+    viteDevServer,
+    isProduction,
+    root,
+  })
+  app.get('*', async (req, res, next) => {
     const url = req.originalUrl
     const pageContextInit = {
       url,
