@@ -1,0 +1,72 @@
+/* Styling custom checkbox */
+.form-check input[type='checkbox'] {
+  visibility: hidden;
+}
+
+.form-check {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.form-check .form-check-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+  border: #dfe1e5 solid 1px;
+  margin: 0 !important;
+}
+
+/* Specify the background color to be
+shown when hovering over checkbox */
+.form-check:hover input[type='checkbox'] ~ .form-check-input {
+  background-color: #dfe1e5;
+}
+
+/* Specify the background color to be
+shown when checkbox is active */
+.form-check input[type='checkbox']:active ~ .form-check-input {
+  background-color: #0e9a00;
+}
+
+/* Specify the background color to be
+shown when checkbox is checked */
+.form-check input[type='checkbox']:checked ~ .form-check-input {
+  background-color: #0e9a00;
+}
+
+/* Display checkmark when disabled */
+.form-check input[type='checkbox']:disabled ~ .form-check-input {
+  background-color: #ccc;
+}
+
+/* Checkmark to be shown in checkbox */
+/* It is not be shown when not checked */
+.form-check .form-check-input:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Display checkmark when checked */
+.form-check input[type='checkbox']:checked ~ .form-check-input:after {
+  display: block;
+}
+
+.form-check .form-check-input:after {
+  left: 9px;
+  bottom: 6px;
+  width: 6px;
+  height: 12px;
+  border: solid #dfe1e5;
+  border-width: 0 4px 4px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

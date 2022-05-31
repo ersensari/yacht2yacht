@@ -1,0 +1,45 @@
+@import "variables";
+
+/*
+ * Skeleton for Loading
+ */
+//
+.loading {
+    position: relative;
+    &::before {
+        content: '';
+        border-radius: 3px;
+        display: block;
+        width: 100%;
+        height: 1rem;
+        position: absolute;
+        background-image: linear-gradient(90deg, transparent, rgba($blue, 0) 0px, rgba($blue, 0.8) 50%, rgba($blue, 0) 100%, transparent);
+        background-position: -150% 0;
+        background-repeat: no-repeat;
+        background-size: 70%;
+        animation: loading 1s linear infinite;
+        z-index: 1000;
+    }
+
+    &::after {
+        content: '';
+        border-radius: 3px;
+        display: block;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        background: #000000;
+        position: absolute;
+        top: 0;
+    }
+
+    @keyframes loading {
+        to {
+            background-position: 350% 0;
+        }
+    }
+
+}
+
+
+

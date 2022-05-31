@@ -1,0 +1,89 @@
+// Variables
+@import 'variables';
+
+.location-auto-complete {
+  height: 2.7rem;
+
+  .fas {
+    color: gray;
+    padding-left: 10px;
+  }
+
+  .far {
+    color: gray;
+    padding-left: 10px;
+  }
+
+  &-wrapper {
+    white-space: nowrap;
+    position: relative;
+  }
+
+  &-control {
+    border: 1px rgba(223, 225, 229, 1) solid !important;
+    // padding: 0 4px 0 4px !important;
+    // display: inline-block !important;
+    justify-content: center !important;
+    border-radius: 10px;
+    background-color: #ffffff !important;
+    & input {
+      border: none;
+      background-color: transparent;
+      cursor: text;
+      width: calc(100% - 27px);
+    }
+
+    & input:focus {
+      outline: none !important;
+      -webkit-box-shadow: none !important;
+      -moz-box-shadow: none !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    &:hover {
+      @include do-box-shadow();
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+    }
+
+    &:focus-within {
+      align-items: start;
+    }
+  }
+
+  &-result {
+    width: 100%;
+    border: 1px rgba(223, 225, 229, 1) solid;
+    max-height: 70vh;
+    overflow: auto;
+    overflow-x: hidden;
+    border-radius: 10px;
+    background: #ffffff;
+    a:focus {
+      background-color: #4e9fcf;
+      color: #ffffff;
+
+      & .fa {
+        color: #ffffff;
+      }
+    }
+
+    &:focus-within {
+      outline: none !important;
+      -webkit-box-shadow: none !important;
+      -moz-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+
+    ul:focus-within {
+      outline: none !important;
+      -webkit-box-shadow: none !important;
+      -moz-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  }
+}

@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './markdown.css';
+
+@font-face {
+  font-family: 'Cooper Lt BT';
+  src: url('../fonts/CooperBT-Bold.woff2') format('woff2'),
+    url('../fonts/CooperBT-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cooper Lt BT';
+  src: url('../fonts/CooperBT-Light.woff2') format('woff2'),
+    url('../fonts/CooperBT-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim Pro';
+  src: url('../fonts/GTWalsheimPro-Bold.woff2') format('woff2'),
+    url('../fonts/GTWalsheimPro-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim Pro';
+  src: url('../fonts/GTWalsheimPro-Light.woff2') format('woff2'),
+    url('../fonts/GTWalsheimPro-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim Pro';
+  src: url('../fonts/GTWalsheimPro-Regular.woff2') format('woff2'),
+    url('../fonts/GTWalsheimPro-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  @apply transition transition-opacity duration-150 ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  @apply opacity-0;
+}
+
+
+.collapse-enter-active,
+.collapse-leave-active {
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: rgb(232, 26, 26);
+  opacity: 0.75;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}

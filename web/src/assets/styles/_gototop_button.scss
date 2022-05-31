@@ -1,0 +1,41 @@
+.btn-gototop {
+  display: inline-block;
+  background-color: #ff9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 10px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-gototop::after {
+  content: '\f151';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: bold;
+  font-style: normal;
+  font-size: 3em;
+  line-height: 50px;
+  color: #fff;
+}
+
+.btn-gototop:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+
+.btn-gototop:active {
+  background-color: #555;
+}
+
+.btn-gototop.show {
+  opacity: 1;
+  visibility: visible;
+}
