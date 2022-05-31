@@ -9,7 +9,13 @@ import { installI18n, extractLocaleFromPath, DEFAULT_LOCALE } from './i18n'
 import App from './App.vue'
 import { createPinia } from 'pinia'
 
-// import '~/assets/styles/fonts.scss'
+import '~/assets/styles/fonts.scss'
+import '~/assets/styles/tailwind.css'
+import '~/assets/styles/main.scss'
+
+if (typeof window !== 'undefined') {
+  console.log('You are on the browser')
+}
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -24,8 +30,8 @@ export default viteSSR(
       return locale === DEFAULT_LOCALE ? '/' : `/${locale}/`
     },
     transformState: (state) => {
-      console.log(state);
-      
+      //console.log(state);
+
       return import.meta.env.SSR ? devalue(state) : state
     },
   },
@@ -42,7 +48,6 @@ export default viteSSR(
 
     const pinia = createPinia()
     app.use(pinia)
-console.log(ctx)
     app.component(ClientOnly.name, ClientOnly)
 
     // Load language asyncrhonously to avoid bundling all languages
@@ -58,7 +63,6 @@ console.log(ctx)
       // This object can be passed to Vuex store
     } else {
       // In browser, initialState will be hydrated with data from SSR
-      console.log('Initial state:', initialState.pinia)
 
       pinia.state.value = initialState.pinia
     }

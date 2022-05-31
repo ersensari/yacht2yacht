@@ -12,10 +12,9 @@ import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Prism from 'markdown-it-prism'
 import LinkAttributes from 'markdown-it-link-attributes'
-
 import svgLoader from 'vite-svg-loader'
-
 import viteSSR from 'vite-ssr/plugin'
+
 import getPageProps from "./serverless/api/get-page-props"
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
@@ -76,7 +75,8 @@ export default defineConfig({
       dts: 'src/components.d.ts',
       resolvers: [
         IconsResolver({
-          componentPrefix: 'ico'
+          prefix: false,
+          enabledCollections:['mdi','carbon']
         })
       ],
     }),
@@ -87,7 +87,7 @@ export default defineConfig({
 
     Icons({
       scale: 1.2,
-      autoInstall: false,
+      autoInstall: false      
     }),
 
     // https://github.com/antfu/vite-plugin-md
@@ -153,11 +153,11 @@ export default defineConfig({
       'vue',
       'vue-router',
       '@vueuse/core',
-      '@vueuse/head',
+      '@vueuse/head'
     ],
     exclude: [
-      'vue-demi',
+      'vue-demi'
     ],
-  },
 
+  },
 })
