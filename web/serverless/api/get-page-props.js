@@ -3,7 +3,7 @@ export default (req, res) => {
   console.log('-- getPageProps', url.searchParams.toString())
 
   const routeName = url.searchParams.get('name') || ''
-
+  console.log(routeName);
   res.setHeader(
     'Cache-Control',
     'max-age=0, s-maxage=86400, stale-while-revalidate'
@@ -13,6 +13,7 @@ export default (req, res) => {
     JSON.stringify({
       server: true,
       message: `This is page "${routeName.toUpperCase()}"`,
+      url: url.pathname.toString()
     })
   )
 }

@@ -14,4 +14,8 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
- 
+
+
+declare module '~icons/mdi/currency-usd'
+declare module '~icons/mdi/currency-try'
+declare module '~icons/mdi/currency-eur'

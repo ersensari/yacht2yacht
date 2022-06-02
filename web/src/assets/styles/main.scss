@@ -1,1 +1,7 @@
 @import 'location_auto_complete';
+
+@layer components {
+  .link {
+    @apply flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue lg:p-0 lg:w-auto lg:px-4 no-underline;
+  }
+}

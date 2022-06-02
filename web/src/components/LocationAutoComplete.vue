@@ -32,11 +32,11 @@ const data = reactive({
   },
 })
 
-watch(props.value, (value) => {
-  if (value === null) {
-    data.keyword = ''
-  }
-})
+// watch(props.value, (value) => {
+//   if (value === null) {
+//     data.keyword = ''
+//   }
+// })
 
 const orderby = computed(() => 'name')
 const router = useRouter()

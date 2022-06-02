@@ -1,54 +1,61 @@
 <script setup lang="ts">
+import { defineProps, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
-const user = useUserStore()
-const name = ref(user.savedName)
-const { t, locale } = useI18n()
+const name = ref('')
+
 const router = useRouter()
 const go = () => {
-  if (name.value) router.push(`/${locale.value}/name/${encodeURIComponent(name.value)}`)
+  if (name.value) router.push(`/hi/${encodeURIComponent(name.value)}`)
 }
+
+const { t } = useI18n()
+
+const props = defineProps({
+  message: String,
+})
 </script>
 
 <template>
   <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
-    </div>
+    <p class="text-4xl">
+      <carbon-campsite class="inline-block" />
+    </p>
     <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
+      <a
+        rel="noreferrer"
+        href="https://github.com/frandiox/vitesse-ssr-template"
+        target="_blank"
+      >
+        Vitesse SSR
       </a>
     </p>
     <p>
-      <em text-sm opacity-75>{{ t('intro.desc') }}</em>
+      <em class="text-sm opacity-75">{{ t('intro.desc') }}</em>
     </p>
 
-    <div py-4 />
+    <div class="py-4" />
 
-    <input id="input" v-model="name" :placeholder="t('intro.whats-your-name')" :aria-label="t('intro.whats-your-name')"
-      type="text" autocomplete="false" p="x4 y2" w="250px" text="center" bg="transparent"
-      border="~ rounded gray-200 dark:gray-700" outline="none active:none" @keydown.enter="go" />
+    <input
+      id="input"
+      v-model="name"
+      :placeholder="t('intro.whats-your-name')"
+      :aria-label="t('intro.whats-your-name')"
+      type="text"
+      autocomplete="false"
+      class="px-4 py-2 text-sm text-center bg-transparent border border-gray-200 rounded outline-none active:outline-none dark:border-gray-700"
+      style="width: 250px"
+      @keydown.enter="go"
+    />
     <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
 
     <div>
-      <button btn m-3 text-sm :disabled="!name" @click="go">
+      <button class="m-3 text-sm btn" :disabled="!name" @click="go">
         {{ t('button.go') }}
       </button>
     </div>
-    <!-- The button to open modal -->
-    <label for="my-modal" class="btn btn-primary">open modal</label>
-
-    <!-- Put this part before </body> tag -->
-    <input type="checkbox" id="my-modal" class="modal-toggle" />
-    <div class="modal">
-      <div class="modal-box">
-        <h3 class="font-bold text-lg">Congratulations random Interner user!</h3>
-        <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-        <div class="modal-action">
-          <label for="my-modal" class="btn">Yay!</label>
-        </div>
-      </div>
-    </div>
+    Message from API: {{ props.message }}
   </div>
 </template>
 

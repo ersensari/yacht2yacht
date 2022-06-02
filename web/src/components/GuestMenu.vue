@@ -4,7 +4,7 @@ const props = defineProps<{ url: string }>()
 </script>
 <template>
   <li>
-    <RouterLink :to="
+    <RouterLink class="link" :to="
       toHref({
         path: '/login',
         query: { redirect: props.url },
@@ -15,13 +15,13 @@ const props = defineProps<{ url: string }>()
     </RouterLink>
   </li>
   <li>
-    <RouterLink :to="toHref({ path: '/register' })">
+    <RouterLink class="link" :to="toHref({ path: '/register' })">
       <mdi-account-plus />
       {{ t('auth.register') }}
     </RouterLink>
   </li>
   <li>
-    <RouterLink :to="toHref({ path: '/owner/intro' })">
+    <RouterLink class="link" :to="toHref({ path: '/owner/intro' })">
       <mdi-bullhorn class="text-red" />
       <span class="text-red">{{ t('menus.create_ad') }} </span>
     </RouterLink>

@@ -13,7 +13,7 @@ export {
 
 // This is a dynamic import so not all languages are bundled in frontend.
 // For YAML format, install `@rollup/plugin-yaml`.
-const messageImports = import.meta.glob('./translations/*.y(a)?ml')
+const messageImports = import.meta.glob('./translations/*.json')
 
 function importLocale(locale: string) {
   const [, importLocale] =

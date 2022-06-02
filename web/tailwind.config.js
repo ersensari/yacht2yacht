@@ -14,8 +14,8 @@ module.exports = {
     themes: [
       {
         y2y: {
-          "primary": "#057AFF",
-          "secondary": "#ea580c",
+          "primary": "#3490dc",
+          "secondary": "#e83531",
           "accent": "#15803d",
           "neutral": "#021431",
           "base-100": "#FFFFFF",
@@ -53,7 +53,7 @@ module.exports = {
         red: '#e3342f',
         orange: '#f6993f',
         yellow: '#ffed4a',
-        green: '#38c172',
+        green: '#15803d',
         teal: '#4dc0b5',
         cyan: '#6cb2eb',
         darkOrange: '#e83531',

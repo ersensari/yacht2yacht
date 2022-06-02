@@ -33,6 +33,7 @@ export default defineConfig({
       configureServer({ middlewares }) {
         middlewares.use('/api/get-page-props', getPageProps)
       },
+      cacheKey: 'y2y-vite'
     },
 
     Vue({
@@ -58,6 +59,7 @@ export default defineConfig({
         '@vueuse/head',
         '@vueuse/core',
       ],
+
       dts: 'src/auto-imports.d.ts',
       dirs: [
         'src/composables',
@@ -76,7 +78,7 @@ export default defineConfig({
       resolvers: [
         IconsResolver({
           prefix: false,
-          enabledCollections:['mdi','carbon']
+          enabledCollections: ['mdi', 'carbon']
         })
       ],
     }),
@@ -87,7 +89,8 @@ export default defineConfig({
 
     Icons({
       scale: 1.2,
-      autoInstall: false      
+      autoInstall: false,
+      defaultClass: 'i'
     }),
 
     // https://github.com/antfu/vite-plugin-md
@@ -140,11 +143,15 @@ export default defineConfig({
     // https://github.com/intlify/vite-plugin-vue-i18n
     VueI18n({
       include: [path.resolve(__dirname, 'src/i18n/translations/**')],
+      compositionOnly: true,
+      globalSFCScope: true,
+      runtimeOnly: true
     }),
 
     svgLoader({
       svgo: false,
     }),
+
 
   ],
 

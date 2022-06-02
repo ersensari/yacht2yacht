@@ -5,6 +5,8 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CarbonCampsite: typeof import('~icons/carbon/campsite')['default']
+    CarbonPedestrian: typeof import('~icons/carbon/pedestrian')['default']
     Counter: typeof import('./components/Counter.vue')['default']
     CurrencyMenuItem: typeof import('./components/CurrencyMenuItem.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
@@ -12,6 +14,11 @@ declare module '@vue/runtime-core' {
     Header: typeof import('./components/Header.vue')['default']
     LocaleMenuItem: typeof import('./components/LocaleMenuItem.vue')['default']
     LocationAutoComplete: typeof import('./components/LocationAutoComplete.vue')['default']
+    MdiAccount: typeof import('~icons/mdi/account')['default']
+    MdiAccountPlus: typeof import('~icons/mdi/account-plus')['default']
+    MdiBullhorn: typeof import('~icons/mdi/bullhorn')['default']
+    MdiSearch: typeof import('~icons/mdi/search')['default']
+    MdiTranslate: typeof import('~icons/mdi/translate')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
