@@ -1,29 +1,26 @@
-<script setup lang="ts">
-const { t } = useI18n()
-const props = defineProps<{ url: string }>()
-</script>
 <template>
   <li>
-    <RouterLink class="link" :to="
-      toHref({
+    <RouterLink
+      class="link"
+      :to="{
         path: '/login',
-        query: { redirect: props.url },
-      })
-    ">
+        query: { redirect: $route.path },
+      }"
+    >
       <mdi-account />
-      {{ t('auth.login') }}
+      {{ $t('auth.login') }}
     </RouterLink>
   </li>
   <li>
-    <RouterLink class="link" :to="toHref({ path: '/register' })">
+    <RouterLink class="link" to="/register">
       <mdi-account-plus />
-      {{ t('auth.register') }}
+      {{ $t('auth.register') }}
     </RouterLink>
   </li>
   <li>
-    <RouterLink class="link" :to="toHref({ path: '/owner/intro' })">
+    <RouterLink class="link" to="/owner/intro">
       <mdi-bullhorn class="text-red" />
-      <span class="text-red">{{ t('menus.create_ad') }} </span>
+      <span class="text-red">{{ $t('menus.create_ad') }} </span>
     </RouterLink>
   </li>
 </template>

@@ -21,4 +21,4 @@ declare module '*.vue' {
 }
 
 declare module 'minimize';
-declare module 'flowbite';
+declare module 'i18n';

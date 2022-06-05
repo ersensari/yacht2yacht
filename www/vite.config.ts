@@ -25,6 +25,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
+      '@/': `${path.resolve(__dirname)}/`,
     },
   },
 
@@ -115,13 +116,14 @@ export default defineConfig({
       },
     }),
 
-    // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
+    // https://github.com/intlify/vite-plugin-vue-i18n
     VueI18n({
-      runtimeOnly: false,
-      globalSFCScope:true,
+      include: [path.resolve(__dirname, 'src/i18n/translations/**')],
       compositionOnly: true,
-      include: [path.resolve(__dirname, 'locales/**')],
+      globalSFCScope: true,
+      runtimeOnly: false
     }),
+
 
     // https://github.com/antfu/vite-plugin-inspect
     // Visit http://localhost:3333/__inspect/ to see the inspector

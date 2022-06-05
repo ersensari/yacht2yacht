@@ -1,6 +1,10 @@
 export default (req, res) => {
+  if (req.method !== 'POST') {
+    res.statusCode = 400
+    res.end('NOT ALLOWED')
+  }
+
   const url = new URL('http://e.g' + req.url)
-  console.log('-- getPageProps', url.searchParams.toString())
 
   const routeName = url.searchParams.get('name') || ''
   const routePath = url.searchParams.get('path') || ''
@@ -13,7 +17,7 @@ export default (req, res) => {
   res.end(
     JSON.stringify({
       server: true,
-      message: `This is page "${routeName.toUpperCase()}"`,
+      message: req.method,
       path: routePath
     })
   )

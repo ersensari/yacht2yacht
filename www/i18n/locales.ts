@@ -25,3 +25,21 @@ export function extractLocaleFromPath(path = '') {
 
   return SUPPORTED_LOCALES.includes(locale.value) ? locale.value : DEFAULT_LOCALE
 }
+
+export function extractLocale(url: string) {
+  const urlPaths = url.split('/')
+
+  let locale
+  let urlWithoutLocale
+
+  const firstPath = urlPaths[1]
+  if (SUPPORTED_LOCALES.filter((locale) => locale !== DEFAULT_LOCALE).includes(firstPath)) {
+    locale = firstPath
+    urlWithoutLocale = '/' + urlPaths.slice(2).join('/')
+  } else {
+    locale = DEFAULT_LOCALE
+    urlWithoutLocale = url
+  }
+
+  return { locale, urlWithoutLocale }
+}

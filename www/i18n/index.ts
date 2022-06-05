@@ -11,8 +11,6 @@ export {
   extractLocaleFromPath,
 } from './locales'
 
-// This is a dynamic import so not all languages are bundled in frontend.
-// For YAML format, install `@rollup/plugin-yaml`.
 const messageImports = import.meta.glob('./translations/*.json')
 
 function importLocale(locale: string) {
@@ -24,21 +22,14 @@ function importLocale(locale: string) {
   return importLocale && importLocale()
 }
 
-export async function loadAsyncLanguage(i18n: any, locale = DEFAULT_LOCALE) {
-  try {
-    const result = await importLocale(locale)
-    if (result) {
-      i18n.setLocaleMessage(locale, result.default || result)
-      i18n.locale.value = locale
-    }
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 export async function installI18n(app: App, locale = '') {
   locale = SUPPORTED_LOCALES.includes(locale) ? locale : DEFAULT_LOCALE
   const messages = await importLocale(locale)
+
+  //const messageImports = Object.values(import.meta.globEager('./translations/*.json'))
+
+
+  //const messages = await import(`./translations/${locale}.json`)
 
   const i18n = createI18n({
     legacy: false,

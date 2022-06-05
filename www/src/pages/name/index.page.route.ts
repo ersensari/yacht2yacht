@@ -1,1 +1,1 @@
-export default '/:locale/name/:name'
+export default '/name/:name'

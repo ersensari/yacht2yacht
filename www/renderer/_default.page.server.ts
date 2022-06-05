@@ -6,13 +6,17 @@ import { renderHeadToString } from '@vueuse/head'
 import { createApp } from './app'
 import type { PageContext } from '~/types'
 
+import { DEFAULT_LOCALE, SUPPORTED_LANGUAGES } from '../i18n/locales'
+
 export { render }
+export { onBeforePrerender }
+export { passToClient }
 
 // See https://vite-plugin-ssr.com/data-fetching
-export const passToClient = ['pageProps', 'documentProps', 'url']
+const passToClient = ['pageProps', "documentProps", 'locale', 'url']
 
 async function render(pageContext: PageContextBuiltIn & PageContext) {
-  const { app, head } = createApp(pageContext)
+  const { app, head } = await createApp(pageContext)
 
   const appHtml = await renderToString(app)
   const { headTags, htmlAttrs, bodyAttrs } = renderHeadToString(head)
@@ -50,6 +54,30 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
     documentHtml,
     pageContext: {
       // We can add some `pageContext` here, which is useful if we want to do page redirection https://vite-plugin-ssr.com/page-redirection
+    },
+  }
+}
+
+function onBeforePrerender(globalContext: { prerenderPageContexts: any[] }) {
+  const prerenderPageContexts: any[] = []
+  globalContext.prerenderPageContexts.forEach((pageContext) => {
+    prerenderPageContexts.push({
+      ...pageContext,
+      locale: DEFAULT_LOCALE,
+    })
+    SUPPORTED_LANGUAGES
+      .filter((locale: any) => locale !== DEFAULT_LOCALE)
+      .forEach((locale: any) => {
+        prerenderPageContexts.push({
+          ...pageContext,
+          url: `/${locale}${pageContext.url}`,
+          locale,
+        })
+      })
+  })
+  return {
+    globalContext: {
+      prerenderPageContexts,
     },
   }
 }

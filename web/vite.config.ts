@@ -16,6 +16,7 @@ import svgLoader from 'vite-svg-loader'
 import viteSSR from 'vite-ssr/plugin'
 
 import getPageProps from "./serverless/api/get-page-props"
+import getData from "./serverless/api/get-data"
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
 
@@ -32,8 +33,8 @@ export default defineConfig({
       // API mock-up
       configureServer({ middlewares }) {
         middlewares.use('/api/get-page-props', getPageProps)
-      },
-      cacheKey: 'y2y-vite'
+        middlewares.use('/api/get-data', getData)
+      }
     },
 
     Vue({

@@ -1,11 +1,10 @@
 <script setup lang="ts">
-const { t } = useI18n()
 const props = defineProps<{ url: string }>()
 </script>
 <template>
   <nav class="navbar base-100">
     <div class="flex-1">
-      <RouterLink :to="toHref({ path: '/' })">
+      <RouterLink to="/">
         <img
           class="mr-3 h-6 sm:h-9"
           src="../assets/images/logo.svg?url"
@@ -20,7 +19,7 @@ const props = defineProps<{ url: string }>()
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
-        <span class="sr-only">{{ t('nav.toggle_navigation') }}</span>
+        <span class="sr-only">{{ $t('nav.toggle_navigation') }}</span>
         <mdi-search />
       </button>
       <div class="mx-4 w-1/2 lg:block hidden">

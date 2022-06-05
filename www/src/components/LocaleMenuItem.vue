@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { availableLocales, locale } = useI18n()
+import { SUPPORTED_LOCALES as availableLocales } from '@/i18n/locales'
+const { locale } = useI18n()
 const props = defineProps<{ url: string }>()
 
 const language: { [key: string]: string } = { en: 'English', tr: 'Türkçe' }

@@ -3,15 +3,16 @@ import { useClientRouter } from 'vite-plugin-ssr/client/router'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client/router'
 import { createApp } from './app'
 import type { PageContext } from '~/types'
-import 'flowbite'
 
 import NProgress from 'nprogress'
+import 'flowbite'
+
 
 let app: any
 const { hydrationPromise } = useClientRouter({
-  render(pageContext: PageContextBuiltInClient & PageContext) {
+  async render(pageContext: PageContextBuiltInClient & PageContext) {
     if (!app) {
-      const result = createApp(pageContext)
+      const result = await createApp(pageContext)
       app = result.app
       app.mount('#app')
       registerSW({ immediate: true })

@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-
 const name = ref('')
+const user = useUserStore()
 
 const router = useRouter()
 const go = () => {
-  if (name.value) router.push(`/hi/${encodeURIComponent(name.value)}`)
+  if (name.value) {
+    user.setNewName(name.value)
+    router.push(`/hi/${encodeURIComponent(name.value)}`)
+  }
 }
 
-const { t } = useI18n()
+const fetch = useFetch('/api/get-data?path=/deneme', {}, {})
+
+const result = await fetch.post()
 
 const props = defineProps({
   message: String,
+  path: String,
 })
 </script>
 
@@ -32,7 +35,7 @@ const props = defineProps({
       </a>
     </p>
     <p>
-      <em class="text-sm opacity-75">{{ t('intro.desc') }}</em>
+      <em class="text-sm opacity-75">{{ $t('intro.desc') }}</em>
     </p>
 
     <div class="py-4" />
@@ -40,22 +43,23 @@ const props = defineProps({
     <input
       id="input"
       v-model="name"
-      :placeholder="t('intro.whats-your-name')"
-      :aria-label="t('intro.whats-your-name')"
+      :placeholder="$t('intro.whats-your-name')"
+      :aria-label="$t('intro.whats-your-name')"
       type="text"
       autocomplete="false"
       class="px-4 py-2 text-sm text-center bg-transparent border border-gray-200 rounded outline-none active:outline-none dark:border-gray-700"
-      style="width: 250px"
+      style="width: 250px;"
       @keydown.enter="go"
     />
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
+    <label class="hidden" for="input">{{ $t('intro.whats-your-name') }}</label>
 
     <div>
       <button class="m-3 text-sm btn" :disabled="!name" @click="go">
-        {{ t('button.go') }}
+        {{ $t('button.go') }}
       </button>
     </div>
-    Message from API: {{ props.message }}
+    Message from API: {{ props.path }}
+    {{ result.data }}
   </div>
 </template>
 

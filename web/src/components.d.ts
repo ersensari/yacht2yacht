@@ -6,7 +6,6 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     CarbonCampsite: typeof import('~icons/carbon/campsite')['default']
-    CarbonPedestrian: typeof import('~icons/carbon/pedestrian')['default']
     Counter: typeof import('./components/Counter.vue')['default']
     CurrencyMenuItem: typeof import('./components/CurrencyMenuItem.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']

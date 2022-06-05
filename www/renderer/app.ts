@@ -2,9 +2,10 @@ import { createSSRApp } from 'vue'
 import { createHead } from '@vueuse/head'
 import { setPageContext } from './usePageContext'
 import type { Component, PageContext } from '~/types'
-import DefaultLayout from '~/layouts/default.vue'
+import PageLayout from '~/layouts/PageLayout.vue'
 import { createPinia } from 'pinia'
 import devalue from '@nuxt/devalue'
+import { installI18n } from '../i18n'
 
 import '@unocss/reset/tailwind.css'
 import '~/assets/styles/fonts.scss'
@@ -12,8 +13,8 @@ import 'uno.css'
 
 export { createApp }
 
-function createApp(pageContext: PageContext) {
-  const { Page } = pageContext
+async function createApp(pageContext: PageContext) {
+  const { Page, pageProps } = pageContext
   let rootComponent: Component
   const PageWithLayout = defineComponent({
     data: () => ({
@@ -25,11 +26,11 @@ function createApp(pageContext: PageContext) {
     },
     render() {
       return h(
-        DefaultLayout,
-        { layout: this.pageProps.layout, url: this.pageProps.url || '' },
+        PageLayout,
+        { url: pageContext.url, locale: pageContext.locale },
         {
-          default: () => {
-            return h(this.Page, this.pageProps)
+          default() {
+            return h(Page, pageProps)
           },
         },
       )
@@ -45,6 +46,9 @@ function createApp(pageContext: PageContext) {
   app.use(pinia)
 
   devalue(pinia.state.value)
+
+  await installI18n(app, pageContext.locale)
+
 
   // Install all modules under `modules/`
   Object.values(import.meta.globEager('../src/modules/*.ts')).forEach((i) =>

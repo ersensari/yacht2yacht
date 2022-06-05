@@ -3,11 +3,11 @@ import viteSSR, { ClientOnly } from 'vite-ssr'
 import { createHead } from '@vueuse/head'
 import generatedRoutes from 'virtual:generated-pages'
 import { setupLayouts } from 'virtual:generated-layouts'
-//import devalue from '@nuxt/devalue'
+import devalue from '@nuxt/devalue'
 
 import { installI18n, extractLocaleFromPath } from './i18n'
 import App from './App.vue'
-//import { createPinia } from 'pinia'
+import { createPinia } from 'pinia'
 
 import '~/assets/styles/fonts.scss'
 import '~/assets/styles/tailwind.scss'
@@ -28,9 +28,9 @@ export default viteSSR(
       const locale = extractLocaleFromPath(url.pathname)
       return `/${locale}/`
     },
-    // transformState: (state) => {
-    //   return import.meta.env.SSR ? devalue(state) : state
-    // },
+    transformState: (state) => {
+      return import.meta.env.SSR ? devalue(state) : state
+    },
   },
   async (ctx) => {
     // install all modules under `modules/`
@@ -43,25 +43,26 @@ export default viteSSR(
     const head = createHead()
     app.use(head)
 
-    // const pinia = createPinia()
-    // app.use(pinia)
     app.component(ClientOnly.name, ClientOnly)
+
+    const pinia = createPinia()
+    app.use(pinia)
+    
 
     // Load language asyncrhonously to avoid bundling all languages
     await installI18n(app, extractLocaleFromPath(initialRoute.href))
 
 
     // Freely modify initialState and it will be serialized later
-    // if (import.meta.env.SSR) {
-    //   initialState.test = 'This should appear in page-view-source'
+    if (import.meta.env.SSR) {
+      initialState.test = 'This should appear in page-view-source'
+      initialState.pinia = pinia.state.value
+      // This object can be passed to Vuex store
+    } else {
+      // In browser, initialState will be hydrated with data from SSR
 
-    //   initialState.pinia = pinia.state.value
-    //   // This object can be passed to Vuex store
-    // } else {
-    //   // In browser, initialState will be hydrated with data from SSR
-
-    //   pinia.state.value = initialState.pinia
-    // }
+      pinia.state.value = initialState.pinia
+    }
 
     // As an example, make a getPageProps request before each route navigation
     router.beforeEach(async (to: { meta: { state: any }; path: string | number | boolean; name: any }, from: any, next: () => void) => {
