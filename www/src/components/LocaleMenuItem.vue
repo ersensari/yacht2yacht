@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SUPPORTED_LOCALES as availableLocales } from '@/i18n/locales'
+import { SUPPORTED_LOCALES as availableLocales } from '../../i18n/locales'
 const { locale } = useI18n()
 const props = defineProps<{ url: string }>()
 
@@ -43,6 +43,7 @@ const getLanguagePath = (newLanguage: string) => {
         <li v-for="lang in availableLocales" :key="lang">
           <a
             :href="getLanguagePath(lang)"
+            replace
             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             {{ language[lang] }}

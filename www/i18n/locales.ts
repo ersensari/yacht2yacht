@@ -7,7 +7,7 @@ export const SUPPORTED_LANGUAGES = [
   {
     locale: 'tr',
     name: 'Türkçe',
-  }
+  },
 ]
 
 export const SUPPORTED_LOCALES = SUPPORTED_LANGUAGES.map((l) => l.locale)
@@ -23,23 +23,28 @@ export const DEFAULT_LOCALE = DEFAULT_LANGUAGE?.locale as string
 //   if (maybeLocale !== '' && locale.value !== maybeLocale)
 //     locale.value = maybeLocale
 
-//   return SUPPORTED_LOCALES.includes(locale.value) ? locale.value : DEFAULT_LOCALE
+//   return SUPPORTED_LOCALES.includes(locale.value)
+//     ? locale.value
+//     : DEFAULT_LOCALE
 // }
 
 export function extractLocale(url: string) {
-  const urlPaths = url.split('/')
-
+  const urlPaths = url.split('/').filter((x) => x.trim() !== '')
+  
   let locale
   let urlWithoutLocale
 
-  const firstPath = urlPaths[1]
-  if (SUPPORTED_LOCALES.filter((locale) => locale !== DEFAULT_LOCALE).includes(firstPath)) {
+  const firstPath = urlPaths[0]
+  if (
+    SUPPORTED_LOCALES.filter((l) => l !== DEFAULT_LOCALE).includes(firstPath)
+  ) {
     locale = firstPath
-    urlWithoutLocale = '/' + urlPaths.slice(2).join('/')
+    urlWithoutLocale = '/' + urlPaths.slice(1).join('/')
   } else {
     locale = DEFAULT_LOCALE
     urlWithoutLocale = url
   }
+  console.log(locale, urlWithoutLocale)
 
   return { locale, urlWithoutLocale }
 }

@@ -14,8 +14,8 @@ export interface PageContext {
     documentProps?: Record<string, unknown>
   }
   documentProps?: Record<string, unknown>
-  url: String
-  locale: String
+  url: string
+  locale: string
   redirectTo?: Record<string, unknown>
 }
 export interface BuildContext {

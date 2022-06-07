@@ -3,9 +3,6 @@ import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-import Pages from 'vite-plugin-pages'
-import generateSitemap from 'vite-ssg-sitemap'
-import Layouts from 'vite-plugin-vue-layouts'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import svgLoader from 'vite-svg-loader'
@@ -29,14 +26,6 @@ export default defineConfig({
       include: [/\.vue$/],
       reactivityTransform: true,
     }),
-
-    // https://github.com/hannoeru/vite-plugin-pages
-    Pages({
-      extensions: ['vue'],
-    }),
-
-    // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
-    Layouts(),
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
@@ -124,14 +113,6 @@ export default defineConfig({
 
     ssr(),
   ],
-  // https://github.com/antfu/vite-ssg
-  ssgOptions: {
-    script: 'async',
-    formatting: 'minify',
-    onFinished() {
-      generateSitemap()
-    },
-  },
   server: {
     fs: {
       strict: true,
@@ -143,7 +124,16 @@ export default defineConfig({
     include: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
     exclude: ['vue-demi'],
     esbuildOptions: {
-      plugins: [esbuildCommonjs(['minimize'])],
+      plugins: [esbuildCommonjs(['minimize', 'lodash'])],
+    },
+  },
+  clearScreen: false,
+  // Neeed if using an ESM-only library. This is not the case of this example and it's, in general, a rare case. But such situation will increasingly occur as ESM-only libraries emerge.
+  build: {
+    rollupOptions: {
+      output: {
+        format: 'es', // Transpile to ESM instead of CJS
+      },
     },
   },
 })

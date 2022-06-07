@@ -6,7 +6,7 @@ const name = ref(user.savedName)
 const { t } = useI18n()
 
 const go = async () => {
-  navigate(`/name/${encodeURIComponent(name.value)}/`)
+  navigate(`/hi/${encodeURIComponent(name.value)}/`)
 }
 </script>
 
@@ -140,7 +140,3 @@ const go = async () => {
     </div>
   </div>
 </template>
-<route lang="yaml">
-meta:
-  layout: PageLayout
-</route>

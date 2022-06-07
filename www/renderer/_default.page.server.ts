@@ -9,15 +9,11 @@ import type { PageContext } from '~/types'
 import { DEFAULT_LOCALE, SUPPORTED_LANGUAGES } from '../i18n/locales'
 
 export { render }
-export { onBeforePrerender }
-export { passToClient }
-
 // See https://vite-plugin-ssr.com/data-fetching
-const passToClient = [
+export const passToClient = [
   'pageProps',
   'documentProps',
   'locale',
-  'url',
   'redirectTo',
 ]
 
@@ -25,26 +21,21 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
   const { app, head } = await createApp(pageContext)
 
   if (pageContext.redirectTo) {
-    return {
-      documentHtml: dangerouslySkipEscape(
-        new Minimize({
-          quotes: true,
-          spare: true,
-          comments: true,
-          empty: true,
-        }).parse(`<p>Redirecting...</p>
+    const documentHtml = new Minimize({
+      quotes: true,
+      spare: true,
+      comments: true,
+      empty: true,
+    }).parse(`<p>Redirecting...</p>
                 <script data-cfasync="false" type="text/javascript">
                   window.location.href='${pageContext.redirectTo}'
                 </script>
-              `),
-      ),
-      pageContext: {
-        redirectTo: pageContext.redirectTo || '/',
-      },
-    }
+              `)
+    return dangerouslySkipEscape(documentHtml)
   }
 
   const appHtml = await renderToString(app)
+  //const stream = renderToNodeStream(app)
   const { headTags, htmlAttrs, bodyAttrs } = renderHeadToString(head)
   const contentHtml = `
   <!DOCTYPE html>
@@ -67,27 +58,18 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
     </body>
   </html>`
 
-  const documentHtml = dangerouslySkipEscape(
-    new Minimize({
-      quotes: true,
-      spare: true,
-      comments: true,
-      empty: true,
-    }).parse(contentHtml),
-  )
+  const documentHtml = new Minimize({
+    quotes: true,
+    spare: true,
+    comments: true,
+    empty: true,
+  }).parse(contentHtml)
 
-  return {
-    documentHtml,
-    pageContext: {
-      // We can add some `pageContext` here, which is useful if we want to do page redirection https://vite-plugin-ssr.com/page-redirection
-    },
-  }
+  return dangerouslySkipEscape(documentHtml)
 }
 
-async function onBeforePrerender(globalContext: {
-  prerenderPageContexts: any[]
-}) {
-  console.log(globalContext)
+export const prerender = (globalContext: { prerenderPageContexts: any[] }) => {
+  console.log('prerender')
 
   const prerenderPageContexts: any[] = []
   globalContext.prerenderPageContexts.forEach((pageContext) => {

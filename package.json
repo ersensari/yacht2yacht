@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "concurrently -n app,panel,functions 'npm run dev -w app' 'npm run dev -w panel' 'npm run serve -w functions'",
+    "dev": "concurrently -n app,functions 'npm run dev -w app' 'npm run serve -w functions'",
+    "dev:app": "npm run dev -w app",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deployStagingSite": "firebase deploy -P staging --only hosting:y2y2022"
   },
@@ -12,15 +13,13 @@
   "license": "MIT",
   "workspaces": [
     "app",
-    "panel",
     "functions"
   ],
   "dependencies": {
     "concurrently": "^7.1.0"
   },
   "engines": {
-    "node": "16",
-    "npm": "8"
+    "node": "16"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.26.0",

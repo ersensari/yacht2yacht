@@ -15,15 +15,15 @@ import LinkAttributes from 'markdown-it-link-attributes'
 import svgLoader from 'vite-svg-loader'
 import viteSSR from 'vite-ssr/plugin'
 
-import getPageProps from "./serverless/api/get-page-props"
-import getData from "./serverless/api/get-data"
+import getPageProps from './serverless/api/get-page-props'
+// import getTest from './serverless/api/get-test'
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
 
 export default defineConfig({
   resolve: {
     alias: {
-      '~/': `${path.resolve(__dirname, 'src')}/`,
+      '~/': `${path.resolve(__dirname, 'app/src')}/`,
     },
   },
 
@@ -33,18 +33,18 @@ export default defineConfig({
       // API mock-up
       configureServer({ middlewares }) {
         middlewares.use('/api/get-page-props', getPageProps)
-        middlewares.use('/api/get-data', getData)
-      }
+        // middlewares.use('/api/get-test', getTest)
+      },
     },
 
     Vue({
-      include: [/\.vue$/, /\.md$/]
+      include: [/\.vue$/, /\.md$/],
     }),
 
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
       extensions: ['vue', 'md'],
-      resolver: 'vue'
+      resolver: 'vue',
     }),
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
@@ -60,12 +60,8 @@ export default defineConfig({
         '@vueuse/head',
         '@vueuse/core',
       ],
-
       dts: 'src/auto-imports.d.ts',
-      dirs: [
-        'src/composables',
-        'src/store',
-      ],
+      dirs: ['src/composables', 'src/store'],
       vueTemplate: true,
     }),
 
@@ -79,19 +75,19 @@ export default defineConfig({
       resolvers: [
         IconsResolver({
           prefix: false,
-          enabledCollections: ['mdi', 'carbon']
-        })
+          enabledCollections: ['mdi', 'carbon'],
+        }),
       ],
     }),
 
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
-    //Unocss(),
+    // Unocss(),
 
     Icons({
       scale: 1.2,
       autoInstall: false,
-      defaultClass: 'i'
+      defaultClass: 'i',
     }),
 
     // https://github.com/antfu/vite-plugin-md
@@ -146,26 +142,16 @@ export default defineConfig({
       include: [path.resolve(__dirname, 'src/i18n/translations/**')],
       compositionOnly: true,
       globalSFCScope: true,
-      runtimeOnly: true
+      runtimeOnly: true,
     }),
 
     svgLoader({
       svgo: false,
     }),
-
-
   ],
 
   optimizeDeps: {
-    include: [
-      'vue',
-      'vue-router',
-      '@vueuse/core',
-      '@vueuse/head'
-    ],
-    exclude: [
-      'vue-demi'
-    ],
-
+    include: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
+    exclude: ['vue-demi'],
   },
 })

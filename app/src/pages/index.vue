@@ -1,4 +1,9 @@
 <script setup lang="ts">
+
+const props = defineProps({
+  message: String,
+  path: String,
+})
 const name = ref('')
 const user = useUserStore()
 
@@ -10,14 +15,8 @@ const go = () => {
   }
 }
 
-const fetch = useFetch('/api/get-data?path=/deneme', {}, {})
-
-const result = await fetch.post()
-
-const props = defineProps({
-  message: String,
-  path: String,
-})
+const testStore = useDemoStore()
+const data = await testStore.getTest()
 </script>
 
 <template>
@@ -38,6 +37,7 @@ const props = defineProps({
       <em class="text-sm opacity-75">{{ $t('intro.desc') }}</em>
     </p>
 
+    {{ data }}
     <div class="py-4" />
 
     <input
@@ -59,7 +59,6 @@ const props = defineProps({
       </button>
     </div>
     Message from API: {{ props.path }}
-    {{ result.data }}
   </div>
 </template>
 

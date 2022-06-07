@@ -15,13 +15,6 @@ useHead({
 <template>
   <div>
     <section class="py-64 bg-sand">
-      <img
-        src="../src/assets/images/illustration-hands-up.svg?url"
-        width="300"
-        height="167"
-        class="mx-auto mb-8 max-w-full"
-        alt="404"
-      >
       <div v-if="is404" class="p-4 max-w-3xl mx-auto text-center">
         <h2 class="my-6">
           Oops! 404.

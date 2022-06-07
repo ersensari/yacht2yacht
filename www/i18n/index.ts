@@ -3,8 +3,7 @@ import { createI18n } from 'vue-i18n'
 import { DATE_FORMATS } from './date-formats'
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from './locales'
 import { NUMBER_FORMATS } from './number-formats'
-import tr from './translations/tr.json'
-import en from './translations/en.json'
+
 export {
   DEFAULT_LOCALE,
   SUPPORTED_LOCALES,
@@ -12,16 +11,29 @@ export {
   extractLocale,
 } from './locales'
 
-export async function installI18n(app: App, locale = '') {
+const messageImports = import.meta.glob('./translations/*.json')
+
+function importLocale(locale: string) {
+  const [, importLocale] =
+    Object.entries(messageImports).find(([key]) =>
+      key.includes(`/${locale}.`),
+    ) || []
+
+  return importLocale && importLocale()
+}
+
+export async function installI18n(app: App, locale: string) {
   locale = SUPPORTED_LOCALES.includes(locale) ? locale : DEFAULT_LOCALE
+
+  const messages = await importLocale(locale)
+
   const i18n = createI18n({
     legacy: false,
     locale,
     fallbackLocale: DEFAULT_LOCALE,
     globalInjection: true,
     messages: {
-      tr,
-      en,
+      [locale]: messages?.default || messages,
     },
     datetimeFormats: DATE_FORMATS,
     numberFormats: NUMBER_FORMATS,

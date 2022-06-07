@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const props = defineProps<{ name: string }>()
+defineProps<{name:string, url:string, locale:string}>()
 const user = useUserStore()
 
-watchEffect(() => {
-  user.setNewName(props.name)
-})
+// watchEffect(() => {
+//   user.setNewName(name)
+// })
 </script>
 
 <template>
@@ -12,9 +12,10 @@ watchEffect(() => {
     <div text-4xl>
       <div i-carbon-pedestrian inline-block />
     </div>
-    <p v-html="$t('intro.hi', { Name: props.name })">
+    <p v-html="$t('intro.hi', { Name: name })">
+  
     </p>
-
+{{url}} - {{locale}}
     <p text-sm opacity-75>
       <em>{{ $t('intro.dynamic-route') }}</em>
     </p>

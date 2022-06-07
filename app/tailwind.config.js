@@ -2,27 +2,21 @@ module.exports = {
   darkMode: 'class',
   attributify: true,
   preflight: false,
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
-  plugins: [
-    require("@tailwindcss/typography"),
-    require('daisyui'),
-  ],
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui: {
     themes: [
       {
         y2y: {
-          "primary": "#3490dc",
-          "secondary": "#e83531",
-          "accent": "#15803d",
-          "neutral": "#021431",
-          "base-100": "#FFFFFF",
-          "info": "#93E6FB",
-          "success": "#80CED1",
-          "warning": "#EFD8BD",
-          "error": "#E58B8B",
+          'primary': '#3490dc',
+          'secondary': '#e83531',
+          'accent': '#15803d',
+          'neutral': '#021431',
+          'base-100': '#FFFFFF',
+          'info': '#93E6FB',
+          'success': '#80CED1',
+          'warning': '#EFD8BD',
+          'error': '#E58B8B',
         },
       },
     ],
@@ -88,5 +82,5 @@ module.exports = {
         16: 'repeat(16, minmax(0, 1fr))',
       },
     },
-  }
+  },
 }

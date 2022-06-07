@@ -2,7 +2,7 @@ import { createSSRApp } from 'vue'
 import { createHead } from '@vueuse/head'
 import { setPageContext } from './usePageContext'
 import type { Component, PageContext } from '~/types'
-import PageLayout from '~/layouts/PageLayout.vue'
+import PageLayout from '~/layouts/default.vue'
 import { createPinia } from 'pinia'
 import devalue from '@nuxt/devalue'
 import { installI18n } from '../i18n'
@@ -14,12 +14,12 @@ import 'uno.css'
 export { createApp }
 
 async function createApp(pageContext: PageContext) {
-  const { Page, pageProps } = pageContext
+  const { Page } = pageContext
   let rootComponent: Component
   const PageWithLayout = defineComponent({
     data: () => ({
       Page: markRaw(Page),
-      pageProps: markRaw(pageProps || {}),
+      pageProps: markRaw(pageContext.pageProps || {}),
     }),
     created() {
       rootComponent = this
@@ -28,9 +28,7 @@ async function createApp(pageContext: PageContext) {
       return h(
         PageLayout,
         {
-          layout: this.pageProps.layout,
-          url: this.pageProps.url,
-          locale: this.pageProps.locale,
+          ...this.pageProps,
         },
         {
           default: () => {
