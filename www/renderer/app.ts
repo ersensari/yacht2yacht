@@ -19,7 +19,7 @@ async function createApp(pageContext: PageContext) {
   const PageWithLayout = defineComponent({
     data: () => ({
       Page: markRaw(Page),
-      pageProps: markRaw(pageContext.pageProps || {}),
+      pageProps: markRaw(pageProps || {}),
     }),
     created() {
       rootComponent = this
@@ -27,10 +27,14 @@ async function createApp(pageContext: PageContext) {
     render() {
       return h(
         PageLayout,
-        { url: pageContext.url, locale: pageContext.locale },
         {
-          default() {
-            return h(Page, pageProps)
+          layout: this.pageProps.layout,
+          url: this.pageProps.url,
+          locale: this.pageProps.locale,
+        },
+        {
+          default: () => {
+            return h(this.Page, this.pageProps)
           },
         },
       )
@@ -48,7 +52,6 @@ async function createApp(pageContext: PageContext) {
   devalue(pinia.state.value)
 
   await installI18n(app, pageContext.locale)
-
 
   // Install all modules under `modules/`
   Object.values(import.meta.globEager('../src/modules/*.ts')).forEach((i) =>

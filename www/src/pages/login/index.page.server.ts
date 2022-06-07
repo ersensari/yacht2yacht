@@ -1,10 +1,10 @@
-import { PageContextBuiltIn } from 'vite-plugin-ssr'
-
-export const onBeforeRender = async ({ routeParams }: PageContextBuiltIn) => {
+import type { PageContext } from '~/types'
+export const onBeforeRender = async (pageContext: PageContext) => {
   return {
     pageContext: {
       pageProps: {
-        url: `/${routeParams.locale}/login`,
+        url: pageContext.url,
+        locale: pageContext.locale,
       },
     },
   }

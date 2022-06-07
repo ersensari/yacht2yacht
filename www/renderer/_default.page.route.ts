@@ -1,19 +1,21 @@
 // _default.page.route.ts
 
-import { extractLocale } from "../i18n/locales"
-import { PageContextBuiltInClient } from "vite-plugin-ssr/client/router"
-import { PageContext } from "~/types"
+import { extractLocale } from '../i18n/locales'
+import type { PageContext } from '~/types'
+import type { PageContextBuiltIn } from 'vite-plugin-ssr'
 
 export { onBeforeRoute }
 
-function onBeforeRoute(pageContext: PageContextBuiltInClient & PageContext) {
-  let { url } = pageContext
+function onBeforeRoute(pageContext: PageContext & PageContextBuiltIn) {
+  let { urlPathname } = pageContext
+  if (urlPathname.startsWith('/manifest')) return
 
-  const { urlWithoutLocale, locale } = extractLocale(url)
-  url = urlWithoutLocale
+  const { urlWithoutLocale, locale } = extractLocale(urlPathname)
+  urlPathname = urlWithoutLocale
   return {
     pageContext: {
-      url, locale,
-    }
+      url: urlPathname,
+      locale,
+    },
   }
 }

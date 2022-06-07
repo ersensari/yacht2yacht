@@ -32,7 +32,6 @@ const onNavToggle = (value: boolean) => (isNavOpen.value = value)
 </script>
 <template>
   <main class="container w-full mx-auto">
-    {{ $i18n.locale }}
     <Header :url="props.url" @nav-toggle="onNavToggle" />
     <div
       class="container w-full mx-auto pt-[7rem]"

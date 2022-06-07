@@ -12,7 +12,6 @@ declare module '@vue/runtime-core' {
     Header: typeof import('./components/Header.vue')['default']
     LocaleMenuItem: typeof import('./components/LocaleMenuItem.vue')['default']
     LocationAutoComplete: typeof import('./components/LocationAutoComplete.vue')['default']
-    README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SpinButton: typeof import('./components/SpinButton.vue')['default']

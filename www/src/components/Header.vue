@@ -9,12 +9,13 @@ const props = defineProps<{ url: string }>()
       <div
         class="container flex flex-wrap justify-between items-center mx-auto"
       >
-        <a class="flex items-center" href="/">
-          <img
+        <a class="flex items-center text-4xl" href="/" replace>
+          BLA!
+          <!-- <img
             class="mr-3 h-6 sm:h-9"
             src="/images/logo.svg?url"
             alt="Yacht2Yacht"
-          />
+          /> -->
         </a>
         <!-- Mobil menu button -->
         <button
@@ -50,13 +51,13 @@ const props = defineProps<{ url: string }>()
             ></path>
           </svg>
         </button>
-        <div class="p-2 flex-grow-1">
+        <!-- <div class="p-2 flex-grow-1">
           <location-auto-complete
             name="location"
             :onentersearch="true"
             :onselectsearch="true"
           />
-        </div>
+        </div> -->
         <div class="hidden w-full md:block md:w-auto" id="mobile-menu">
           <ul
             class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium"

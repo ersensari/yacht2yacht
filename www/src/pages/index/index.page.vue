@@ -2,11 +2,11 @@
 import { navigate } from 'vite-plugin-ssr/client/router'
 
 const user = useUserStore()
-const name = $ref(user.savedName)
+const name = ref(user.savedName)
 const { t } = useI18n()
 
 const go = async () => {
-  navigate(`/name/${encodeURIComponent(name)}/`)
+  navigate(`/name/${encodeURIComponent(name.value)}/`)
 }
 </script>
 
@@ -140,8 +140,7 @@ const go = async () => {
     </div>
   </div>
 </template>
-
 <route lang="yaml">
 meta:
-  layout: default
+  layout: PageLayout
 </route>

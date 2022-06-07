@@ -13,10 +13,36 @@ export { onBeforePrerender }
 export { passToClient }
 
 // See https://vite-plugin-ssr.com/data-fetching
-const passToClient = ['pageProps', "documentProps", 'locale', 'url']
+const passToClient = [
+  'pageProps',
+  'documentProps',
+  'locale',
+  'url',
+  'redirectTo',
+]
 
 async function render(pageContext: PageContextBuiltIn & PageContext) {
   const { app, head } = await createApp(pageContext)
+
+  if (pageContext.redirectTo) {
+    return {
+      documentHtml: dangerouslySkipEscape(
+        new Minimize({
+          quotes: true,
+          spare: true,
+          comments: true,
+          empty: true,
+        }).parse(`<p>Redirecting...</p>
+                <script data-cfasync="false" type="text/javascript">
+                  window.location.href='${pageContext.redirectTo}'
+                </script>
+              `),
+      ),
+      pageContext: {
+        redirectTo: pageContext.redirectTo || '/',
+      },
+    }
+  }
 
   const appHtml = await renderToString(app)
   const { headTags, htmlAttrs, bodyAttrs } = renderHeadToString(head)
@@ -58,22 +84,27 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
   }
 }
 
-function onBeforePrerender(globalContext: { prerenderPageContexts: any[] }) {
+async function onBeforePrerender(globalContext: {
+  prerenderPageContexts: any[]
+}) {
+  console.log(globalContext)
+
   const prerenderPageContexts: any[] = []
   globalContext.prerenderPageContexts.forEach((pageContext) => {
     prerenderPageContexts.push({
       ...pageContext,
       locale: DEFAULT_LOCALE,
     })
-    SUPPORTED_LANGUAGES
-      .filter((locale: any) => locale !== DEFAULT_LOCALE)
-      .forEach((locale: any) => {
-        prerenderPageContexts.push({
-          ...pageContext,
-          url: `/${locale}${pageContext.url}`,
-          locale,
-        })
+
+    SUPPORTED_LANGUAGES.filter(
+      (locale: any) => locale !== DEFAULT_LOCALE,
+    ).forEach((locale: any) => {
+      prerenderPageContexts.push({
+        ...pageContext,
+        url: `/${locale}${pageContext.url}`,
+        locale,
       })
+    })
   })
   return {
     globalContext: {

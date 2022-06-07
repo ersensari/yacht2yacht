@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { toHref } from '~/composables/route'
+
 const { t } = useI18n()
 const auth = { user: { name: '', avatar: '' } } //useAuth()
 </script>

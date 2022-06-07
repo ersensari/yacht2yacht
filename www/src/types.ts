@@ -1,19 +1,22 @@
-import { type ViteSSGContext } from 'vite-ssg'
+import type { ViteSSGContext } from 'vite-ssg'
 
 export type UserModule = (ctx: ViteSSGContext) => void
 
 export type Component = any
-export type PageProps = {}
+export interface PageProps {
+  [x: string]: any
+}
 // The `pageContext` that are available in both on the server-side and browser-side
-export type PageContext = {
-  Page: any
-  pageProps?: PageProps
-  documentProps?: {
-    title?: string
-    description?: string
+export interface PageContext {
+  Page: Component
+  pageProps: PageProps
+  pageExports: {
+    documentProps?: Record<string, unknown>
   }
-  url: string,
-  locale: string
+  documentProps?: Record<string, unknown>
+  url: String
+  locale: String
+  redirectTo?: Record<string, unknown>
 }
 export interface BuildContext {
   paths: string[]
