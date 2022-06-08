@@ -3,16 +3,16 @@
 
 import { inject } from 'vue'
 import type { App } from 'vue'
-import type { PageContext } from '~/types'
+import { PageContext } from '~/types'
 
 export { usePageContext }
 export { setPageContext }
 
 // eslint-disable-next-line symbol-description
-const key = Symbol()
+const key = Symbol('page-context')
 
-function usePageContext() {
-  const pageContext = inject(key)
+function usePageContext(): PageContext {
+  const pageContext = inject<PageContext & any>(key)
   return pageContext
 }
 

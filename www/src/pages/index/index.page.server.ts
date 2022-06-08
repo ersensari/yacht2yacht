@@ -3,8 +3,6 @@ export const onBeforeRender = async (pageContext: any) => {
   return {
     pageContext: {
       pageProps: {
-        url: pageContext.url,
-        locale: pageContext.locale,
         data,
       },
     },

@@ -26,7 +26,6 @@ export default defineConfig({
       scale: 1.2,
       warn: true,
       autoInstall: false,
-      prefix: 'ico',
       extraProperties: {
         display: 'inline-block',
         'vertical-align': 'middle',

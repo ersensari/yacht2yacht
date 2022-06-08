@@ -12,7 +12,7 @@ const auth = { user: { name: '', avatar: '' } } //useAuth()
       :href="toHref({ path: '/yacht-owner' })"
     >
       <span class="text-red">
-        <div ico-mdi-bullhorn />
+        <div i-mdi-bullhorn />
         {{ t('menus.create_ad') }}
       </span>
     </a>

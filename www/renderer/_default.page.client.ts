@@ -5,7 +5,6 @@ import { createApp } from './app'
 import type { PageContext } from '~/types'
 
 import NProgress from 'nprogress'
-import 'flowbite'
 
 let app: any
 const { hydrationPromise } = useClientRouter({

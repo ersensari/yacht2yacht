@@ -1,23 +1,21 @@
 <script setup lang="ts">
+// import { usePageContext } from 'renderer/usePageContext';
 import { SUPPORTED_LOCALES as availableLocales } from '../../i18n/locales'
-const { locale } = useI18n()
-const props = defineProps<{ url: string }>()
+// const { locale } = usePageContext()
+const props = defineProps<{ url: string, locale:string }>()
 
 const language: { [key: string]: string } = { en: 'English', tr: 'Türkçe' }
 
-const localeName = computed(() => language[locale.value])
+const localeName = computed(() => language[props.locale])
 
 const getLanguagePath = (newLanguage: string) => {
-  if (!props.url) return '/' + locale.value
+  if (!props.url) return '/' + props.locale
   const currentPath = props.url
   const languageDetector = new RegExp(`^\/(${availableLocales.join('|')})?\/?`)
   let newPath
 
   newPath = currentPath.replace(languageDetector, `/${newLanguage}/`)
 
-  if (currentPath !== newPath) {
-    locale.value = newLanguage
-  }
   return newPath
 }
 </script>
@@ -28,7 +26,7 @@ const getLanguagePath = (newLanguage: string) => {
       data-dropdown-toggle="localeMenu"
       class="flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
     >
-      <div ico-mdi-translate />
+      <div i-mdi-translate />
       {{ localeName }}
     </button>
 

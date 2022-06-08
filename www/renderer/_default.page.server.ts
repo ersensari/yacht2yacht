@@ -6,7 +6,7 @@ import { renderHeadToString } from '@vueuse/head'
 import { createApp } from './app'
 import type { PageContext } from '~/types'
 
-// import { DEFAULT_LOCALE, SUPPORTED_LANGUAGES } from '../i18n/locales'
+import { DEFAULT_LOCALE, SUPPORTED_LANGUAGES } from '../i18n/locales'
 
 export { render }
 // See https://vite-plugin-ssr.com/data-fetching
@@ -68,29 +68,27 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
   return dangerouslySkipEscape(documentHtml)
 }
 
-// export const prerender = (globalContext: { prerenderPageContexts: any[] }) => {
-//   console.log('prerender')
+export const prerender = (globalContext: { prerenderPageContexts: any[] }) => {
+  const prerenderPageContexts: any[] = []
+  globalContext.prerenderPageContexts.forEach((pageContext) => {
+    prerenderPageContexts.push({
+      ...pageContext,
+      locale: DEFAULT_LOCALE,
+    })
 
-//   const prerenderPageContexts: any[] = []
-//   globalContext.prerenderPageContexts.forEach((pageContext) => {
-//     prerenderPageContexts.push({
-//       ...pageContext,
-//       locale: DEFAULT_LOCALE,
-//     })
-
-//     SUPPORTED_LANGUAGES.filter(
-//       (locale: any) => locale !== DEFAULT_LOCALE,
-//     ).forEach((locale: any) => {
-//       prerenderPageContexts.push({
-//         ...pageContext,
-//         url: `/${locale}${pageContext.url}`,
-//         locale,
-//       })
-//     })
-//   })
-//   return {
-//     globalContext: {
-//       prerenderPageContexts,
-//     },
-//   }
-// }
+    SUPPORTED_LANGUAGES.filter(
+      (locale: any) => locale !== DEFAULT_LOCALE,
+    ).forEach((locale: any) => {
+      prerenderPageContexts.push({
+        ...pageContext,
+        url: `/${locale}${pageContext.url}`,
+        locale,
+      })
+    })
+  })
+  return {
+    globalContext: {
+      prerenderPageContexts,
+    },
+  }
+}

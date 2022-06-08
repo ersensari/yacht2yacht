@@ -55,8 +55,7 @@ export default defineConfig({
         // auto import icons
         // https://github.com/antfu/unplugin-icons
         IconsResolver({
-          prefix: 'ico',
-          // enabledCollections: ['carbon']
+          enabledCollections: ['carbon', 'mdi']
         }),
       ],
 
@@ -122,18 +121,8 @@ export default defineConfig({
 
   optimizeDeps: {
     include: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
-    exclude: ['vue-demi'],
     esbuildOptions: {
-      plugins: [esbuildCommonjs(['minimize', 'lodash'])],
-    },
-  },
-  clearScreen: false,
-  // Neeed if using an ESM-only library. This is not the case of this example and it's, in general, a rare case. But such situation will increasingly occur as ESM-only libraries emerge.
-  build: {
-    rollupOptions: {
-      output: {
-        format: 'es', // Transpile to ESM instead of CJS
-      },
+      plugins: [esbuildCommonjs(['minimize'])],
     },
   },
 })

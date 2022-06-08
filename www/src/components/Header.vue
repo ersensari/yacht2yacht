@@ -1,8 +1,24 @@
 <script setup lang="ts">
-const props = defineProps<{ url: string }>()
+const props = defineProps<{ url: string, locale: string}>()
+const emit = defineEmits(['navToggle'])
+const isNavOpen = ref(false)
+const isNavScrolled = ref(false)
+
+const toggleNav = () => {
+  isNavOpen.value = !isNavOpen.value
+  emit('navToggle', isNavOpen.value)
+}
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    isNavOpen.value = false
+    emit('navToggle', false)
+  })
+})
+
 </script>
 <template>
-  <header>
+  <header :class="{ 'xl:bg-sand': isNavScrolled, 'xl:h-30': isNavScrolled }">
+  {{$i18n.locale}}
     <nav
       class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800"
     >
@@ -19,11 +35,10 @@ const props = defineProps<{ url: string }>()
         </a>
         <!-- Mobil menu button -->
         <button
-          data-collapse-toggle="mobile-menu"
           type="button"
           class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
+          :aria-pressed="isNavOpen"
+          @click="toggleNav"
         >
           <span class="sr-only">{{ $t('nav.toggle_navigation') }}</span>
           <svg
@@ -62,7 +77,7 @@ const props = defineProps<{ url: string }>()
           <ul
             class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium"
           >
-            <locale-menu-item :url="props.url" />
+            <locale-menu-item :url="props.url" :locale="props.locale" />
             <currency-menu-item />
             <guest-menu :url="props.url" v-if="1 === 1" />
             <user-menu v-else />

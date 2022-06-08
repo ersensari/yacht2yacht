@@ -2,13 +2,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "module": "ESNext",
-    "target": "ESNext",
+    "target": "es2016",
     "lib": [
       "DOM",
       "ESNext"
     ],
     "strict": true,
     "esModuleInterop": true,
+    "incremental": false,
     "jsx": "preserve",
     "skipLibCheck": true,
     "moduleResolution": "node",
@@ -17,10 +18,8 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "types": [
-      "vite/client",
-      "vue/ref-macros",
-      "vite-plugin-pages/client",
-      "vite-plugin-vue-layouts/client"
+      "node",
+      "vite/client"
     ],
     "paths": {
       "~/*": [
@@ -38,7 +37,6 @@
   },
   "exclude": [
     "dist",
-    "node_modules",
-    "cypress"
+    "node_modules"
   ]
 }

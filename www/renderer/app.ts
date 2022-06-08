@@ -1,4 +1,4 @@
-import { createSSRApp } from 'vue'
+import { createSSRApp, defineComponent, h, markRaw, reactive } from 'vue'
 import { createHead } from '@vueuse/head'
 import { setPageContext } from './usePageContext'
 import type { Component, PageContext } from '~/types'
@@ -26,7 +26,7 @@ async function createApp(pageContext: PageContext) {
     },
     render() {
       return h(
-        PageLayout,
+        PageLayout as Component,
         {
           ...this.pageProps,
         },
@@ -48,6 +48,8 @@ async function createApp(pageContext: PageContext) {
   app.use(pinia)
 
   devalue(pinia.state.value)
+
+  console.log(pageContext.locale);
 
   await installI18n(app, pageContext.locale)
 

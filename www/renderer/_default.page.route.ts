@@ -11,7 +11,6 @@ export function onBeforeRoute(pageContext: PageContext & PageContextBuiltIn) {
 
   const { urlWithoutLocale, locale } = extractLocale(url)
   url = urlWithoutLocale
-  console.log(locale, pageContext.url)
 
   return {
     pageContext: {
