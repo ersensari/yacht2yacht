@@ -3,7 +3,7 @@ export const onBeforeRender = async (pageContext: any) => {
   return {
     pageContext: {
       pageProps: {
-        data,
+        data
       },
     },
   }

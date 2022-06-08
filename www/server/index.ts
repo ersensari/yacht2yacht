@@ -3,7 +3,7 @@ import compression from 'compression'
 import { createPageRenderer } from 'vite-plugin-ssr'
 import type { PageContext } from '~/types'
 import * as vite from 'vite'
-import { DEFAULT_LOCALE } from '../i18n/locales'
+import { extractLocale } from '../i18n/locales'
 
 const isProduction = process.env.NODE_ENV === 'production'
 const root = `${__dirname}/..`
@@ -26,16 +26,23 @@ async function startServer() {
     app.use(viteDevServer.middlewares)
   }
 
-  const renderPage = await createPageRenderer({
+  const renderPage = createPageRenderer({
     viteDevServer,
     isProduction,
     root,
   })
 
   app.get('*', async (req, res, next) => {
-    let url = req.originalUrl
+    let url = req.path
+    if (url.startsWith('/manifest')) return next()
 
-    const pageContextInit = { url, locale: DEFAULT_LOCALE }
+    let { locale } = extractLocale(url)
+    //url = urlWithoutLocale
+
+    console.log('server.ts:', locale, url);
+
+
+    const pageContextInit = { url, locale }
     const pageContext = await renderPage(pageContextInit)
 
     const { httpResponse } = pageContext
@@ -49,8 +56,8 @@ async function startServer() {
     }
 
     if (!httpResponse) return next()
-    const stream = await httpResponse.getNodeStream()
     const { statusCode, contentType } = httpResponse
+    const stream = await httpResponse.getNodeStream()
     res.status(statusCode).type(contentType)
     stream.pipe(res)
   })

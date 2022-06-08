@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     Footer: typeof import('./components/Footer.vue')['default']
     GuestMenu: typeof import('./components/GuestMenu.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
+    Link: typeof import('./components/Link.vue')['default']
     LocaleMenuItem: typeof import('./components/LocaleMenuItem.vue')['default']
     LocationAutoComplete: typeof import('./components/LocationAutoComplete.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

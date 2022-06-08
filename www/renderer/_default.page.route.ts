@@ -1,21 +1,27 @@
 // _default.page.route.ts
 
-import { extractLocale } from '../i18n/locales'
 import type { PageContext } from '~/types'
 import type { PageContextBuiltIn } from 'vite-plugin-ssr'
+import { includeLocale, extractLocale, DEFAULT_LOCALE } from '../i18n/locales';
 
 export function onBeforeRoute(pageContext: PageContext & PageContextBuiltIn) {
-  let { urlPathname: url } = pageContext
+  let { locale, urlPathname: url, } = pageContext
 
   if (url.startsWith('/manifest')) return
 
-  const { urlWithoutLocale, locale } = extractLocale(url)
-  url = urlWithoutLocale
+  locale = locale === undefined ? DEFAULT_LOCALE : locale
+
+  url = includeLocale(locale, url)
+
+  const { urlWithoutLocale } = extractLocale(url)
 
   return {
     pageContext: {
-      url,
-      locale,
+      url: urlWithoutLocale,
+      locale
     },
   }
 }
+
+
+// export const filesystemRoutingRoot = '/src/pages'

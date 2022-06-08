@@ -39,3 +39,4 @@ function onTransitionEnd() {
   // console.log('Page transition end')
   // document.querySelector('.content')!.classList.remove('page-transition')
 }
+

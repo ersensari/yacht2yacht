@@ -4,6 +4,7 @@
 import { inject } from 'vue'
 import type { App } from 'vue'
 import { PageContext } from '~/types'
+import { PageContextBuiltIn } from 'vite-plugin-ssr'
 
 export { usePageContext }
 export { setPageContext }
@@ -11,8 +12,8 @@ export { setPageContext }
 // eslint-disable-next-line symbol-description
 const key = Symbol('page-context')
 
-function usePageContext(): PageContext {
-  const pageContext = inject<PageContext & any>(key)
+function usePageContext(): PageContext & PageContextBuiltIn {
+  const pageContext = inject<PageContext & PageContextBuiltIn & any>(key)
   return pageContext
 }
 

@@ -28,6 +28,7 @@ async function createApp(pageContext: PageContext) {
       return h(
         PageLayout as Component,
         {
+          layout: this.pageProps.layout,
           ...this.pageProps,
         },
         {
@@ -48,8 +49,6 @@ async function createApp(pageContext: PageContext) {
   app.use(pinia)
 
   devalue(pinia.state.value)
-
-  console.log(pageContext.locale);
 
   await installI18n(app, pageContext.locale)
 
