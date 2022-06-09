@@ -8,7 +8,7 @@ import type { PageContext } from '~/types'
 import { includeLocale, DEFAULT_LOCALE, SUPPORTED_LOCALES } from '../i18n/locales'
 
 export { render }
-export { onBeforePrerender }
+export { prerender }
 
 // See https://vite-plugin-ssr.com/data-fetching
 export const passToClient = [
@@ -82,7 +82,7 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
 }
 
 
-function onBeforePrerender(globalContext: { prerenderPageContexts: any[] }) {
+function prerender(globalContext: { prerenderPageContexts: any[] }) {
   const prerenderPageContexts: any[] = []
   globalContext.prerenderPageContexts.forEach((pageContext: { url: any }) => {
     prerenderPageContexts.push({
