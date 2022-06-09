@@ -3,7 +3,7 @@ import compression from 'compression'
 import { createPageRenderer } from 'vite-plugin-ssr'
 import type { PageContext } from '~/types'
 import * as vite from 'vite'
-import { extractLocale } from '../i18n/locales'
+// import { extractLocale } from '../i18n/locales'
 
 const isProduction = process.env.NODE_ENV === 'production'
 const root = `${__dirname}/..`
@@ -33,16 +33,16 @@ async function startServer() {
   })
 
   app.get('*', async (req, res, next) => {
-    let url = req.path
-    if (url.startsWith('/manifest')) return next()
+    let url = req.originalUrl
+    // if (url.startsWith('/manifest')) return next()
 
-    let { locale } = extractLocale(url)
-    //url = urlWithoutLocale
+    // let { locale, urlWithoutLocale } = extractLocale(url)
+    // url = urlWithoutLocale
 
-    console.log('server.ts:', locale, url);
+    // console.log('server.ts:', locale, url);
 
 
-    const pageContextInit = { url, locale }
+    const pageContextInit = { url }
     const pageContext = await renderPage(pageContextInit)
 
     const { httpResponse } = pageContext
@@ -56,10 +56,10 @@ async function startServer() {
     }
 
     if (!httpResponse) return next()
-    const { statusCode, contentType } = httpResponse
-    const stream = await httpResponse.getNodeStream()
-    res.status(statusCode).type(contentType)
-    stream.pipe(res)
+    const { statusCode, contentType, body } = httpResponse
+    //const stream = await httpResponse.getNodeStream()
+    res.status(statusCode).type(contentType).send(body)
+    //stream.pipe(res)
   })
 
   const port = process.env.PORT || 30
