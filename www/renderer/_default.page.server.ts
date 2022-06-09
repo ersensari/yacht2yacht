@@ -1,6 +1,6 @@
 import Minimize from 'minimize'
 import { renderToString } from '@vue/server-renderer'
-import { dangerouslySkipEscape } from 'vite-plugin-ssr'
+import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr'
 import type { PageContextBuiltIn } from 'vite-plugin-ssr'
 import { renderHeadToString } from '@vueuse/head'
 import { createApp } from './app'
@@ -8,7 +8,7 @@ import type { PageContext } from '~/types'
 import { includeLocale, DEFAULT_LOCALE, SUPPORTED_LOCALES } from '../i18n/locales'
 
 export { render }
-export { prerender }
+export { onBeforePrerender }
 
 // See https://vite-plugin-ssr.com/data-fetching
 export const passToClient = [
@@ -41,13 +41,13 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
   const stream = await renderToString(app)
   const { headTags, htmlAttrs, bodyAttrs } = renderHeadToString(head)
 
-  const contentHtml = `
+  const contentHtml = escapeInject`
   <!DOCTYPE html>
   <html lang="en" ${htmlAttrs}>
     <head>
     <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      ${headTags}
+      ${dangerouslySkipEscape(headTags)}
       <!-- <link rel="manifest" href="/manifest.webmanifest">-->
       <link rel="icon" href="/favicon.svg" type="image/svg+xml">
       <link rel="apple-touch-icon" href="/pwa-192x192.png">
@@ -57,13 +57,13 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
       <meta name="color-scheme" content="light only">
       <base href="/" />
     </head>
-    <body ${bodyAttrs}>
-      <div id="app">${stream}</div>
+    <body ${dangerouslySkipEscape(bodyAttrs)}>
+      <div id="app">${dangerouslySkipEscape(stream)}</div>
     </body>
   </html>`
 
   //return contentHtml
-
+return contentHtml
   const documentHtml = dangerouslySkipEscape(new Minimize(
     {
       quotes: true,
@@ -82,7 +82,7 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
 }
 
 
-function prerender(globalContext: { prerenderPageContexts: any[] }) {
+function onBeforePrerender(globalContext: { prerenderPageContexts: any[] }) {
   const prerenderPageContexts: any[] = []
   globalContext.prerenderPageContexts.forEach((pageContext: { url: any }) => {
     prerenderPageContexts.push({
